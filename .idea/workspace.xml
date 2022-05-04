@@ -5,17 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e605ef4e-44e6-4cb2-a7c7-d6c589b1790a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Debug_Application.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/assembleAsojJudger.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/assembleAsojSpringBoot.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/bootJar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/bootJar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/buildJudger.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/npm_run_build.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/npm_run_start.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/runJudger.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/core/spring/property/SignProperty.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/asoj/Application.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/resources/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/core/spring/property/SemesterInfoProperty.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/core/util/SignUtil.kt" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/core/util/SignUtil.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/mariadb/dao/SignKeysRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/mariadb/domain/SignKeys.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/module/UserInfoModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/module/UserInfoModule.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/resources/semester.properties.sample" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/resources/sign.properties.sample" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,6 +188,8 @@
       <recent name="E:\Documents\JetBrains\InteliJ IDEA\AideSCIT_OJ\asoj-springboot" />
     </key>
     <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="io.github.sgpublic.aidescit.api.core.spring.property" />
+      <recent name="io.github.illusson.scitoj.core.spring.property" />
       <recent name="io.github.sgpublic.aidescit.api" />
     </key>
     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
@@ -252,7 +251,7 @@
       <workItem from="1651663002847" duration="1854000" />
       <workItem from="1651664917889" duration="872000" />
       <workItem from="1651665807544" duration="21000" />
-      <workItem from="1651665844602" duration="1319000" />
+      <workItem from="1651665844602" duration="2666000" />
     </task>
     <servers />
   </component>
