@@ -1,6 +1,6 @@
 package io.github.sgpublic.aidescit.api.module
 
-import io.github.sgpublic.aidescit.api.core.spring.property.SemesterInfoProperty
+import io.github.sgpublic.aidescit.api.core.spring.property.SignProperty
 import io.github.sgpublic.aidescit.api.core.util.Log
 import io.github.sgpublic.aidescit.api.exceptions.ServerRuntimeException
 import io.github.sgpublic.aidescit.api.mariadb.dao.ClassChartRepository
@@ -120,7 +120,7 @@ class UserInfoModule {
             }
             throw ServerRuntimeException("学院ID获取失败：$lblXy")
         }
-        val yearStart = SemesterInfoProperty.YEAR.split("-")[0].toInt()
+        val yearStart = SignProperty.YEAR.split("-")[0].toInt()
         for (i in 0 until 6){
             val year = "${yearStart - i}-${yearStart - i + 1}"
             doc = doc.post(

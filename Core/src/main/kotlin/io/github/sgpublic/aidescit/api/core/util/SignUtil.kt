@@ -1,13 +1,11 @@
 package io.github.sgpublic.aidescit.api.core.util
 
 import io.github.illusson.scitoj.Application
+import io.github.sgpublic.aidescit.api.core.spring.property.SignProperty
 import io.github.sgpublic.aidescit.api.exceptions.InvalidSignException
-import io.github.sgpublic.aidescit.api.exceptions.ServerRuntimeException
 import io.github.sgpublic.aidescit.api.exceptions.ServiceExpiredException
-import io.github.sgpublic.aidescit.api.mariadb.dao.SignKeysRepository
 import io.github.sgpublic.aidescit.api.module.APIModule
 import okhttp3.internal.toLongOrDefault
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.DependsOn
 import org.springframework.stereotype.Component
 
@@ -17,11 +15,6 @@ import org.springframework.stereotype.Component
 @Component
 class SignUtil {
     companion object {
-        const val PLATFORM_WEB = "web"
-        const val PLATFORM_ANDROID = "android"
-
-        private lateinit var sign: SignKeysRepository
-
         @DependsOn("signKeysRepository")
         fun calculate(map: Map<String, Array<String>>){
             if (!map.containsKey("sign")){
@@ -49,21 +42,11 @@ class SignUtil {
                 }
             }
 
-            val appSecret = sign.getAppSecret(
-                (sortedMap["app_key"] ?: sign.getAppKey()!!),
-                (sortedMap["platform"] ?: PLATFORM_WEB)
-            ) ?: throw ServerRuntimeException.INTERNAL_ERROR
-            string.append(appSecret)
+            string.append(SignProperty.APP_SECRET)
             val sign = MD5Util.encodeFull(string.toString())
-            if (sign == sortedMap["sign"]){
-                return
+            if (sign != sortedMap["sign"]){
+                throw InvalidSignException(sign, sortedMap["sign"] ?: "empty")
             }
-            throw InvalidSignException(sign, sortedMap["sign"]!!)
         }
-    }
-
-    @Autowired
-    fun setSignKeysRepository(sign: SignKeysRepository){
-        Companion.sign = sign
     }
 }
