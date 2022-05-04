@@ -18,6 +18,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "AideSCIT_OJ"
-include("asoj-springboot")
+rootProject.name = "SCITOJ_Backend"
+include("Core")
 

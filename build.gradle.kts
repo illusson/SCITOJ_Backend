@@ -23,4 +23,16 @@ subprojects {
     }
 }
 
-apply(from = "assemble.gradle.kts")
+///** 打包 asoj-springboot，可添加参数 -PskipAssembleReact 跳过打包 asoj-react */
+//tasks.register("assembleAsojSpringBoot") {
+//    if (!project.hasProperty("skipAssembleReact")) {
+//        // 跳过打包 asoj-react
+//        dependsOn("asoj-frontend:assembleAsojReact")
+//    }
+//    dependsOn("asoj-frontend:packageAsojReact", "asoj-springboot:bootJar")
+//}
+//
+///** 打包 asoj */
+//tasks.register("assembleAsoj") {
+//    dependsOn("assembleAsojSpringBoot", "asoj-judger:assembleAsojJudger")
+//}

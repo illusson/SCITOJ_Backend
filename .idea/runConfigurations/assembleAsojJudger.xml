@@ -1,16 +1,16 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="assembleAsojSpringBoot (skipAssembleReact)" type="GradleRunConfiguration" factoryName="Gradle">
+  <configuration default="false" name="assembleAsojJudger" type="GradleRunConfiguration" factoryName="Gradle">
     <ExternalSystemSettings>
       <option name="executionName" />
-      <option name="externalProjectPath" value="$PROJECT_DIR$" />
+      <option name="externalProjectPath" value="$PROJECT_DIR$/asoj-judger" />
       <option name="externalSystemIdString" value="GRADLE" />
-      <option name="scriptParameters" value="--stacktrace -PskipAssembleReact" />
+      <option name="scriptParameters" value="--stacktrace -PGOOS=linux -PGOARCH=amd64" />
       <option name="taskDescriptions">
         <list />
       </option>
       <option name="taskNames">
         <list>
-          <option value="assembleAsojSpringBoot" />
+          <option value="assembleAsojJudger" />
         </list>
       </option>
       <option name="vmOptions" />

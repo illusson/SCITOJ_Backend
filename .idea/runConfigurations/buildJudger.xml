@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="runJudger" type="GoApplicationRunConfiguration" factoryName="Go Application">
+  <configuration default="false" name="buildJudger" type="GoApplicationRunConfiguration" factoryName="Go Application">
     <module name="AideSCIT_OJ.asoj-judger" />
     <working_directory value="$PROJECT_DIR$/asoj-judger/bin" />
     <envs>
@@ -12,6 +12,7 @@
     <directory value="$PROJECT_DIR$" />
     <filePath value="$PROJECT_DIR$/asoj-judger/main.go" />
     <output_directory value="$PROJECT_DIR$/asoj-judger/build" />
+    <option name="run" value="false" />
     <method v="2" />
   </configuration>
 </component>

@@ -35,4 +35,11 @@ dependencies {
     implementation("org.jsoup:jsoup:1.14.3")
 }
 
-apply(from = "addon.gradle.kts")
+/** 打包后自动定位打包文件 */
+tasks.named("bootJar") {
+    val path = File(projectDir, "build/libs/asoj-springboot.jar")
+    doFirst {
+        // 删除之前构建的 jar
+        if (path.exists()) path.delete()
+    }
+}
