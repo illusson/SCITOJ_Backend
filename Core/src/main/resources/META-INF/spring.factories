@@ -1,0 +1,2 @@
+# EnvironmentPostProcessor
+org.springframework.boot.env.EnvironmentPostProcessor=io.github.sgpublic.aidescit.api.core.spring.EnvironmentPostProcessorImpl

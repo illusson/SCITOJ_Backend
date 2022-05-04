@@ -5,45 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e605ef4e-44e6-4cb2-a7c7-d6c589b1790a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/assembleAsojSpringBoot__skipAssembleReact_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/npm_run_build.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/npm_run_build.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/npm_run_start.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/npm_run_start.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/runJudger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/runJudger.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Debug_Application.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/assembleAsojJudger.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/assembleAsojSpringBoot.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/bootJar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/bootJar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/buildJudger.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/npm_run_build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/npm_run_start.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/runJudger.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/asoj-judger/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/asoj-judger/build.gradle.kts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/asoj-judger/src/asoj/application/Application.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/asoj-judger/src/asoj/application/stdio/Debuger.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/asoj-judger/src/asoj/application/stdio/stdio.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/asoj-judger/src/asoj/main.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/asoj-react/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/asoj-react/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/asoj-react/build.gradle.kts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/asoj-react/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/asoj-react/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/asoj-react/public/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/asoj-react/public/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/asoj-react/public/logo192.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/asoj-react/public/logo512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/asoj-react/public/manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/asoj-react/public/robots.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/asoj-react/src/App.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/asoj-react/src/App.test.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/asoj-react/src/App.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/asoj-react/src/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/asoj-react/src/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/asoj-react/src/logo.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/asoj-react/src/react-app-env.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/asoj-react/src/reportWebVitals.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/asoj-react/src/setupTests.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/asoj-react/tsconfig.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/asoj-springboot/addon.gradle.kts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/asoj-springboot/build.gradle.kts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/asoj-springboot/src/main/kotlin/io/github/sgpublic/asoj/Application.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/asoj-springboot/src/main/resources/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/asoj/Application.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/resources/.gitignore" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,8 +102,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Kotlin Class" />
         <option value="Go File" />
+        <option value="Kotlin Class" />
       </list>
     </option>
   </component>
@@ -149,17 +121,24 @@
   <component name="JpbToolWindowState">
     <option name="myId2FirstActivated">
       <map>
+        <entry key="com.haulmont.jpb.jpaInspector" value="true" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="true" />
         <entry key="com.haulmont.jpb.jpaStructure" value="true" />
       </map>
     </option>
     <option name="myId2Visible">
       <map>
+        <entry key="com.haulmont.jpb.jpaInspector" value="true" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="true" />
         <entry key="com.haulmont.jpb.jpaStructure" value="false" />
       </map>
     </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="28agbQR8FcV4aETMuP1fXKwx4wV" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -183,7 +162,7 @@
     "configurable.GoLibrariesConfigurable.is.expanded": "true",
     "go.import.settings.migrated": "true",
     "jdk.selected.JAVA_MODULE": "1.8",
-    "last_opened_file_path": "E:/Documents/JetBrains/InteliJ IDEA/SCITOJ/SCITOJ_Backend",
+    "last_opened_file_path": "E:/Documents/JetBrains/InteliJ IDEA/SCITOJ/SCITOJ_Backend/bin",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_interpreter_path": "node",
@@ -192,13 +171,17 @@
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "com.goide.configuration.GoLibrariesConfigurableProvider",
-    "spring.configuration.checksum": "2483ea99fb5ca75c98c69f7cb4af19a6",
+    "spring.configuration.checksum": "e2e18e977df2d6c431cc67914b1027dd",
     "ts.external.directory.path": "E:\\Documents\\JetBrains\\InteliJ IDEA\\AideSCIT_OJ\\asoj-frontend\\node_modules\\typescript\\lib"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\Documents\JetBrains\InteliJ IDEA\AideSCIT_OJ\asoj-judger\src\asoj\Application" />
+      <recent name="E:\Documents\JetBrains\InteliJ IDEA\SCITOJ\SCITOJ_Backend\bin" />
+      <recent name="E:\Documents\JetBrains\InteliJ IDEA\SCITOJ\SCITOJ_Backend\Core\src\main\resources" />
+      <recent name="E:\Documents\JetBrains\InteliJ IDEA\SCITOJ\SCITOJ_Backend\Core\src\main\kotlin\io\github\sgpublic\aidescit\api\data" />
+      <recent name="E:\Documents\JetBrains\InteliJ IDEA\SCITOJ\SCITOJ_Backend\Core\src\main\kotlin\io\github\sgpublic\aidescit\api\mariadb\ids" />
+      <recent name="E:\Documents\JetBrains\InteliJ IDEA\SCITOJ\SCITOJ_Backend\Core\src\main\kotlin\io\github\sgpublic\aidescit\api\mariadb\domain" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\Documents\JetBrains\InteliJ IDEA\AideSCIT_OJ\asoj-frontend\src\pages\home\" />
@@ -207,8 +190,14 @@
       <recent name="E:\Documents\JetBrains\InteliJ IDEA\AideSCIT_OJ\asoj-judger\src\asoj" />
       <recent name="E:\Documents\JetBrains\InteliJ IDEA\AideSCIT_OJ\asoj-springboot" />
     </key>
+    <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="io.github.sgpublic.aidescit.api" />
+    </key>
+    <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
+      <recent name="io.github.illusson.scitoj.data" />
+    </key>
   </component>
-  <component name="RunManager" selected="Gradle.assembleAsojSpringBoot">
+  <component name="RunManager" selected="Kotlin.Application">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <working_directory value="$PROJECT_DIR$" />
       <go_parameters value="-i" />
@@ -226,37 +215,21 @@
       <framework value="gotest" />
       <method v="2" />
     </configuration>
-    <configuration name="assembleAsoj" type="GradleRunConfiguration" factoryName="Gradle">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/asoj-judger" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--stacktrace -PGOOS=linux -PGOARCH=amd64" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="assembleAsojJudger" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
+    <configuration name="Application" type="JetRunConfigurationType" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="io.github.illusson.scitoj.Application" />
+      <module name="SCITOJ_Backend.Core.main" />
+      <option name="PROGRAM_PARAMETERS" value="--deubg" />
+      <shortenClasspath name="NONE" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/bin" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <list>
-      <item itemvalue="Go Build.runJudger" />
-      <item itemvalue="Go Build.buildJudger" />
-      <item itemvalue="Gradle.assembleAsoj" />
-      <item itemvalue="Gradle.assembleAsojJudger" />
-      <item itemvalue="Gradle.assembleAsojSpringBoot" />
       <item itemvalue="Gradle.bootJar" />
-      <item itemvalue="JavaScript Debug.Debug Application" />
-      <item itemvalue="npm.npm run start" />
-      <item itemvalue="npm.npm run build" />
+      <item itemvalue="Kotlin.Application" />
     </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -276,7 +249,10 @@
       <workItem from="1651588319142" duration="1095000" />
       <workItem from="1651653867516" duration="681000" />
       <workItem from="1651660517885" duration="1196000" />
-      <workItem from="1651663002847" duration="414000" />
+      <workItem from="1651663002847" duration="1854000" />
+      <workItem from="1651664917889" duration="872000" />
+      <workItem from="1651665807544" duration="21000" />
+      <workItem from="1651665844602" duration="1319000" />
     </task>
     <servers />
   </component>

@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>Logback Log Messages</title>
+<style  type="text/css">
+table { margin-left: 2em; margin-right: 2em; border-left: 2px solid #AAA; }
+TR.even { background: #FFFFFF; }
+TR.odd { background: #EAEAEA; }
+TR.warn TD.Level, TR.error TD.Level, TR.fatal TD.Level {font-weight: bold; color: #FF4040 }
+TD { padding-right: 1ex; padding-left: 1ex; border-right: 2px solid #AAA; }
+TD.Time, TD.Date { text-align: right; font-family: courier, monospace; font-size: smaller; }
+TD.Thread { text-align: left; }
+TD.Level { text-align: right; }
+TD.Logger { text-align: left; }
+TR.header { background: #596ED5; color: #FFF; font-weight: bold; font-size: larger; }
+TD.Exception { background: #A2AEE8; font-family: courier, monospace;}
+</style>
+
+  </head>
+<body>
+<hr/>
+<p>Log session start time Wed May 04 20:10:31 CST 2022</p><p></p>
+
+<table cellspacing="0">
+<tr class="header">
+<td class="Level">Level</td>
+<td class="Date">Date</td>
+<td class="Trace">Trace</td>
+<td class="Username">Username</td>
+<td class="Message">Message</td>
+</tr>
+
+
+<tr class="error even">
+<td class="Level">ERROR</td>
+<td class="Date">2022-05-04 20:10:31.689</td>
+<td class="Trace">SpringApplication.java:830</td>
+<td class="Username"></td>
+<td class="Message">Application run failed</td>
+</tr>
+<tr><td class="Exception" colspan="6">java.io.FileNotFoundException: class path resource [key.properties] cannot be resolved to URL because it does not exist
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.core.io.ClassPathResource.getURL(ClassPathResource.java:214)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.core.io.AbstractFileResolvingResource.getFile(AbstractFileResolvingResource.java:158)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at io.github.sgpublic.aidescit.api.core.spring.EnvironmentPostProcessorImpl.postProcessEnvironment(EnvironmentPostProcessorImpl.kt:35)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.boot.env.EnvironmentPostProcessorApplicationListener.onApplicationEnvironmentPreparedEvent(EnvironmentPostProcessorApplicationListener.java:102)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.boot.env.EnvironmentPostProcessorApplicationListener.onApplicationEvent(EnvironmentPostProcessorApplicationListener.java:87)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:176)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:169)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:143)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:131)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.boot.context.event.EventPublishingRunListener.environmentPrepared(EventPublishingRunListener.java:85)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.boot.SpringApplicationRunListeners.lambda$environmentPrepared$2(SpringApplicationRunListeners.java:66)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at java.util.ArrayList.forEach(ArrayList.java:1259)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:120)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:114)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.boot.SpringApplicationRunListeners.environmentPrepared(SpringApplicationRunListeners.java:65)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.boot.SpringApplication.prepareEnvironment(SpringApplication.java:339)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.boot.SpringApplication.run(SpringApplication.java:297)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.boot.SpringApplication.run(SpringApplication.java:1312)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.boot.SpringApplication.run(SpringApplication.java:1301)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at io.github.illusson.scitoj.Application$Companion.main(Application.kt:72)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at io.github.illusson.scitoj.Application.main(Application.kt)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at java.lang.reflect.Method.invoke(Method.java:498)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+</td></tr>
