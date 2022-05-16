@@ -1,59 +1,74 @@
 package io.github.sgpublic.aidescit.api.core.util
 
-import com.google.gson.Gson
 import java.io.Serializable
+import java.math.BigInteger
 import java.security.MessageDigest
 
+private val instance: MessageDigest get() = MessageDigest.getInstance("MD5")
+
 /**
- * MD5 简单封装
+ * 16 位 MD5
  */
-object MD5Util {
-    private val instance: MessageDigest get() = MessageDigest.getInstance("MD5")
+val String.MD5: String get() {
+    return MD5_FULL.substring(5, 24)
+}
 
-    /**
-     * 计算 16 位 MD5
-     * @param src 传入 [String] 类型
-     * @return 返回 [String]
-     */
-    fun encode(src: String): String {
-        return encodeFull(src).substring(5, 24)
-    }
-
-    /**
-     * 计算 16 位 MD5
-     * @param src 传入 [Serializable] 类型，通过 [Gson] 转换为 [String]
-     * @return 返回 [String]
-     */
-    fun encode(src: Serializable): String {
-        return encodeFull(src).substring(5, 24)
-    }
-
-    /**
-     * 计算 32 位 MD5
-     * @param src 传入 [String] 类型
-     * @return 返回 [String]
-     */
-    fun encodeFull(src: String): String {
-        val digest = instance.digest(src.toByteArray())
-        return StringBuffer().run {
-            for (b in digest) {
-                val i :Int = b.toInt() and 0xff
-                var hexString = Integer.toHexString(i)
-                if (hexString.length < 2) {
-                    hexString = "0$hexString"
-                }
-                append(hexString)
+/**
+ * 32 位 MD5
+ */
+val String.MD5_FULL: String get() {
+    val digest = instance.digest(toByteArray())
+    return StringBuffer().run {
+        for (b in digest) {
+            val i :Int = b.toInt() and 0xff
+            var hexString = Integer.toHexString(i)
+            if (hexString.length < 2) {
+                hexString = "0$hexString"
             }
-            toString()
+            append(hexString)
         }
+        toString()
     }
+}
 
-    /**
-     * 计算 32 位 MD5
-     * @param src 传入 [Serializable] 类型，通过 [Gson] 转换为 [String]
-     * @return 返回 [String]
-     */
-    fun encodeFull(src: Serializable): String {
-        return encodeFull(src.toGson())
-    }
+/**
+ * 8 位 MD5，由 16 位 MD5 转换为 32 进制得来
+ */
+val String.MD5_COMPRESSED: String get() {
+    return BigInteger(MD5, 16).toString(32)
+}
+
+/**
+ * 8 位 MD5，由 16 位 MD5 转换为 32 进制得来
+ */
+val String.MD5_FULL_COMPRESSED: String get() {
+    return BigInteger(MD5_FULL, 16).toString(32)
+}
+
+/**
+ * 16 位 MD5
+ */
+val Serializable.MD5: String get() {
+    return MD5_FULL.substring(5, 24)
+}
+
+/**
+ * 32 位 MD5
+ */
+val Serializable.MD5_FULL: String get() {
+    return toGson().MD5_FULL
+}
+
+/**
+ * 8 位 MD5，由 16 位 MD5 转换为 32 进制得来
+ */
+val Serializable.MD5_COMPRESSED: String get() {
+    return BigInteger(MD5, 16).toString(32)
+}
+
+/**
+ * 8 位 MD5，由 16 位 MD5 转换为 32 进制得来
+ */
+val Serializable.MD5_FULL_COMPRESSED: String get() {
+    return BigInteger(MD5_FULL, 16).toString(32)
 }

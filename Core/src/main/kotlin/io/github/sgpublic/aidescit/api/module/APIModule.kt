@@ -1,7 +1,7 @@
 package io.github.sgpublic.aidescit.api.module
 
 import com.google.gson.Gson
-import io.github.illusson.scitoj.Application
+import io.github.Application
 import io.github.sgpublic.aidescit.api.core.util.*
 import io.github.sgpublic.aidescit.api.data.ViewStateDocument
 import io.github.sgpublic.aidescit.api.exceptions.ServerRuntimeException
@@ -247,6 +247,9 @@ object APIModule {
             /** 请求附带 Cookie 键 */
             @JvmStatic
             val ROUTE: String = "route"
+            /** 请求附带 Cookie 键 */
+            @JvmStatic
+            val ACCESS_TOKEN: String = "access_token"
         }
 
         override fun toString(): String {
@@ -262,11 +265,12 @@ object APIModule {
         class Builder {
             private val cookies: MutableMap<String, ArrayList<Any>> = mutableMapOf()
 
-            fun add(key: String, value: Any){
+            fun add(key: String, value: Any): Builder {
                 if (cookies[key] == null){
                     cookies[key] = ArrayList()
                 }
                 cookies[key]?.add(value)
+                return this
             }
 
             fun build() = Cookies(cookies)
@@ -307,3 +311,6 @@ object APIModule {
         return cp
     }
 }
+
+val Headers.Companion.CONTENT_TYPE: String get() = "Content-Type"
+val Headers.Companion.JSON_UTF_8: String get() = "text/json; charset=UTF-8"

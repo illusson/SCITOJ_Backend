@@ -1,6 +1,5 @@
 package io.github.sgpublic.aidescit.api.module
 
-import io.github.sgpublic.aidescit.api.core.spring.property.SemesterInfoProperty
 import io.github.sgpublic.aidescit.api.core.util.Log
 import io.github.sgpublic.aidescit.api.exceptions.ServerRuntimeException
 import io.github.sgpublic.aidescit.api.mariadb.dao.ClassChartRepository
@@ -120,41 +119,37 @@ class UserInfoModule {
             }
             throw ServerRuntimeException("学院ID获取失败：$lblXy")
         }
-        val yearStart = SemesterInfoProperty.YEAR.split("-")[0].toInt()
-        for (i in 0 until 6){
-            val year = "${yearStart - i}-${yearStart - i + 1}"
-            doc = doc.post(
-                "__EVENTTARGET" to "xq",
-                "xn" to year,
-                "xq" to 1,
-                "nj" to result.grade,
-                "xy" to result.faculty,
-            )
-            doc.select("#zy").select("option").forEach { element ->
-                if (element.text() != lblZymc){
-                    return@forEach
-                }
-                result.specialty = element.attr("value").toIntOrNull()
-                    ?: throw ServerRuntimeException("专业ID解析失败")
-                specialtyChart.save(SpecialtyChart().apply {
-                    specialty = result.specialty
-                    name = lblZymc
-                    faculty = result.faculty
-                })
-                facultyChart.save(FacultyChart().apply {
-                    name = lblXy
-                    faculty = result.faculty
-                })
-                classChart.save(ClassChart().apply {
-                    specialty = result.specialty
-                    faculty = result.faculty
-                    name = lblXzb
-                    grade = result.grade
-                    classId = result.classId
-                })
-                info.save(result)
-                return result
+        doc = doc.post(
+            "__EVENTTARGET" to "xq",
+            "xn" to "${result.grade}-${result.grade + 1}",
+            "xq" to 1,
+            "nj" to result.grade,
+            "xy" to result.faculty,
+        )
+        doc.select("#zy").select("option").forEach { element ->
+            if (element.text() != lblZymc){
+                return@forEach
             }
+            result.specialty = element.attr("value").toIntOrNull()
+                ?: throw ServerRuntimeException("专业ID解析失败")
+            specialtyChart.save(SpecialtyChart().apply {
+                specialty = result.specialty
+                name = lblZymc
+                faculty = result.faculty
+            })
+            facultyChart.save(FacultyChart().apply {
+                name = lblXy
+                faculty = result.faculty
+            })
+            classChart.save(ClassChart().apply {
+                specialty = result.specialty
+                faculty = result.faculty
+                name = lblXzb
+                grade = result.grade
+                classId = result.classId
+            })
+            info.save(result)
+            return result
         }
         throw ServerRuntimeException("专业ID获取失败：$lblZymc")
     }

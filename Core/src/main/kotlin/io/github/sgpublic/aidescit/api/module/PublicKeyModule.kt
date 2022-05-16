@@ -3,7 +3,7 @@ package io.github.sgpublic.aidescit.api.module
 import io.github.sgpublic.aidescit.api.core.spring.property.KeyProperty
 import org.springframework.stereotype.Component
 
-/** 处理接口 [com.sgpublic.aidescit.api.controller.PublicKeyController] */
+/** 处理接口 [io.github.sgpublic.aidescit.api.controller.PublicKeyController] */
 @Component
 class PublicKeyModule {
     /**

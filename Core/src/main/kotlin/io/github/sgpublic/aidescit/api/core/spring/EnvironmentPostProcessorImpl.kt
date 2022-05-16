@@ -19,7 +19,8 @@ class EnvironmentPostProcessorImpl: EnvironmentPostProcessor {
         private val PROFILES = arrayOf(
             "key.properties",
             "sql.properties",
-            "token.properties"
+            "token.properties",
+            "sign.properties"
         )
     }
 
@@ -28,11 +29,11 @@ class EnvironmentPostProcessorImpl: EnvironmentPostProcessor {
      * @see <a href="https://docs.spring.io/spring-boot/docs/2.1.0.RELEASE/reference/htmlsingle/#boot-features-external-config">Externalized Configuration</a>
      */
     override fun postProcessEnvironment(environment: ConfigurableEnvironment, application: SpringApplication?) {
-        val properties = Properties()
         for (profile in PROFILES) {
             val resource = File("config", profile).takeIf { it.exists() }
                 ?: ClassPathResource(profile).file
             require(resource.exists()) { "Properties of $profile not found." }
+            val properties = Properties()
             val property = try {
                 properties.load(FileInputStream(resource))
                 PropertiesPropertySource(profile, properties)

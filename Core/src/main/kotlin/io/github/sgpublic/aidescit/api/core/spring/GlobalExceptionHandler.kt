@@ -1,6 +1,6 @@
 package io.github.sgpublic.aidescit.api.core.spring
 
-import io.github.illusson.scitoj.Application
+import io.github.Application
 import io.github.sgpublic.aidescit.api.core.util.Log
 import io.github.sgpublic.aidescit.api.exceptions.*
 import io.github.sgpublic.aidescit.api.result.FailedResult

@@ -2,7 +2,6 @@ package io.github.sgpublic.aidescit.api.core.spring.property
 
 import io.github.sgpublic.aidescit.api.core.util.Base64Util
 import io.github.sgpublic.aidescit.api.core.util.Log
-import jdk.nashorn.internal.objects.NativeString.substring
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.stereotype.Component
 import java.security.KeyFactory

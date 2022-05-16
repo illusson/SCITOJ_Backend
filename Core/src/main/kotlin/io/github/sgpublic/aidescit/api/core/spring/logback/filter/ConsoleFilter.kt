@@ -4,8 +4,7 @@ import ch.qos.logback.classic.Level
 import ch.qos.logback.classic.spi.ILoggingEvent
 import ch.qos.logback.core.filter.AbstractMatcherFilter
 import ch.qos.logback.core.spi.FilterReply
-import io.github.illusson.scitoj.Application
-import io.github.sgpublic.aidescit.api.Aidescit
+import io.github.Application
 
 /**
  * 控制台输出过滤器
@@ -30,8 +29,6 @@ class ConsoleFilter: AbstractMatcherFilter<ILoggingEvent>() {
         }
     }
 
-    private val packageName: String = Application::class.java.`package`.name
-    private val aidescit: String = Aidescit::class.java.`package`.name
     /**
      * 若日志来自外部，则始终按照等级 [Level.WARN] 过滤
      */
@@ -45,11 +42,12 @@ class ConsoleFilter: AbstractMatcherFilter<ILoggingEvent>() {
         if (!isStarted) {
             return FilterReply.NEUTRAL
         }
-        return filterOnSelf(event).takeIf {
-            event.loggerName.let {
-                return@let it.startsWith(packageName)
-                        || it.startsWith(aidescit)
-            }
-        } ?: filterOnOther(event)
+        val from = event.loggerName.let {
+            return@let it.startsWith("io.github.illusson")
+                    || it.startsWith("io.github.sgpublic")
+                    || it.startsWith("io.github.Application")
+        }
+        return if (from) filterOnSelf(event)
+        else filterOnOther(event)
     }
 }

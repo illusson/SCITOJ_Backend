@@ -27,6 +27,10 @@ class FailedResult(code: Int, message: String): AdvMap(
         @JvmStatic
         val EMPTY_RESULT = FailedResult(-403, "数据为空")
         @JvmStatic
+        val ANONYMOUS_DENIED = FailedResult(-405, "请登陆后再试")
+        @JvmStatic
+        val ACCESS_DENIED = FailedResult(-406, "非常抱歉，您暂时不能访问")
+        @JvmStatic
         val EXPIRED_REFRESH_TOKEN = FailedResult(-404, "token 失效，请重新登陆")
         @JvmStatic
         val INTERNAL_SERVER_ERROR = FailedResult(-500, "服务器内部错误")

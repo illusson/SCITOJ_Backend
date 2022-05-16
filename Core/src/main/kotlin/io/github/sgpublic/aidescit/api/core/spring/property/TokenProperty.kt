@@ -1,7 +1,9 @@
 package io.github.sgpublic.aidescit.api.core.spring.property
 
+import io.jsonwebtoken.security.Keys
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.stereotype.Component
+import javax.crypto.SecretKey
 
 /**
  * 注入 token.properties
@@ -13,16 +15,16 @@ class TokenProperty {
         private lateinit var tokenKey: String
         private lateinit var tokenSecret: String
         private var accessExpired: Long = 2592000
-        private var refreshExpired: Long = 124416000
 
         @JvmStatic
         val TOKEN_KEY: String get() = tokenKey
         @JvmStatic
         val TOKEN_SECRET: String get() = tokenSecret
         @JvmStatic
-        val ACCESS_EXPIRED: Long get() = accessExpired
+        val TOKEN_SIGN_KEY: SecretKey get() =
+            Keys.hmacShaKeyFor(TOKEN_SECRET.toByteArray())
         @JvmStatic
-        val REFRESH_EXPIRED: Long get() = refreshExpired
+        val ACCESS_EXPIRED: Long get() = accessExpired
     }
 
     fun setTokenKey(value: String) {
@@ -35,9 +37,5 @@ class TokenProperty {
 
     fun setAccessExpired(value: Long) {
         accessExpired = value
-    }
-
-    fun setRefreshExpired(value: Long) {
-        refreshExpired = value
     }
 }

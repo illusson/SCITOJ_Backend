@@ -4,23 +4,90 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e605ef4e-44e6-4cb2-a7c7-d6c589b1790a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Debug_Application.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/assembleAsojJudger.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/assembleAsojSpringBoot.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/bootJar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/bootJar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/buildJudger.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/npm_run_build.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/npm_run_start.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/runJudger.xml" beforeDir="false" />
+    <list default="true" id="b9fdfa93-7737-47ea-9fd9-8ffbdd438f71" name="Changes" comment="add Jwt &amp; SpringSecurity impl, login bug fix.">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/Application.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/illusson/scitoj/admin/controller/ProblemController.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/illusson/scitoj/common/controller/ProblemController.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/illusson/scitoj/user/controller/ProblemController.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/controller/PublicKeyController.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/core/spring/config/CurrentConfig.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/core/spring/config/SecurityConfig.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/core/spring/interceptor/SignFilter.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/core/spring/property/SignProperty.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/core/spring/security/AidescitAccessDeniedHandler.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/core/spring/security/AidescitAuthenticationEntryPoint.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/core/spring/security/AidescitAuthenticationFailureHandler.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/core/spring/security/AidescitAuthenticationProcessingFilter.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/core/spring/security/AidescitAuthenticationProvider.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/core/spring/security/AidescitAuthenticationSuccessHandler.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/core/spring/security/AidescitAuthenticationToken.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/core/spring/security/AidescitAuthority.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/core/spring/security/AidescitTokenFilter.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/core/util/JwtUtil.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/exceptions/GsonException.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/src/test/kotlin/io/github/illusson/scitoj/JwtTest.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/HELP.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resource/scitoj.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/kotlinScripting.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/bootJar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/asoj/Application.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/resources/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/Core/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/illusson/scitoj/Application.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/controller/LoginController.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/controller/UserInfoController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/controller/UserInfoController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/core/spring/BaseController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/core/spring/BaseController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/core/spring/CurrentConfig.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/core/spring/EnvironmentPostProcessorImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/core/spring/EnvironmentPostProcessorImpl.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/core/spring/GlobalExceptionHandler.kt" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/core/spring/GlobalExceptionHandler.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/core/spring/interceptor/SignInterceptor.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/core/spring/logback/filter/ConsoleFilter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/core/spring/logback/filter/ConsoleFilter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/core/spring/property/KeyProperty.kt" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/core/spring/property/KeyProperty.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/core/spring/property/SemesterInfoProperty.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/core/spring/property/TokenProperty.kt" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/core/spring/property/TokenProperty.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/core/util/GsonUtil.kt" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/core/util/GsonUtil.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/core/util/MD5Util.kt" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/core/util/MD5Util.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/core/util/RSAUtil.kt" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/core/util/RSAUtil.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/core/util/SignUtil.kt" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/core/util/SignUtil.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/core/util/TokenUtil.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/exceptions/InvalidPasswordFormatException.kt" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/exceptions/InvalidPasswordFormatException.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/exceptions/WrongPasswordException.kt" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/exceptions/WrongPasswordException.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/mariadb/dao/SignKeysRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/mariadb/domain/SignKeys.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/mariadb/domain/UserInfo.kt" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/mariadb/domain/UserInfo.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/mariadb/domain/UserSession.kt" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/mariadb/domain/UserSession.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/module/APIModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/module/APIModule.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/module/PublicKeyModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/module/PublicKeyModule.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/module/SessionModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/module/SessionModule.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/module/UserInfoModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/module/UserInfoModule.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/result/FailedResult.kt" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/result/FailedResult.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/result/SuccessResult.kt" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/result/SuccessResult.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/resources/key.properties.sample" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/resources/semester.properties.sample" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/resources/sql.properties.sample" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/resources/token.properties.sample" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/log/logback.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
   </component>
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
@@ -33,90 +100,33 @@
         <task path="$PROJECT_DIR$">
           <activation />
         </task>
-        <task path="$PROJECT_DIR$/asoj-springboot">
-          <activation />
-        </task>
-        <task path="$PROJECT_DIR$/asoj-judger">
-          <activation />
-        </task>
-        <projects_view>
-          <tree_state>
-            <expand>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="AideSCIT_OJ" type="f1a62948:ProjectNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="AideSCIT_OJ" type="f1a62948:ProjectNode" />
-                <item name="asoj-springboot" type="2d1252cf:ModuleNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="AideSCIT_OJ" type="f1a62948:ProjectNode" />
-                <item name="asoj-springboot" type="2d1252cf:ModuleNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="AideSCIT_OJ" type="f1a62948:ProjectNode" />
-                <item name="asoj-springboot" type="2d1252cf:ModuleNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="build" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="AideSCIT_OJ" type="f1a62948:ProjectNode" />
-                <item name="asoj-springboot" type="2d1252cf:ModuleNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="documentation" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="AideSCIT_OJ" type="f1a62948:ProjectNode" />
-                <item name="asoj-springboot" type="2d1252cf:ModuleNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="help" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="AideSCIT_OJ" type="f1a62948:ProjectNode" />
-                <item name="asoj-springboot" type="2d1252cf:ModuleNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="other" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="AideSCIT_OJ" type="f1a62948:ProjectNode" />
-                <item name="asoj-springboot" type="2d1252cf:ModuleNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="verification" type="c8890929:TasksNode$1" />
-              </path>
-            </expand>
-            <select />
-          </tree_state>
-        </projects_view>
+        <projects_view />
       </state>
     </system>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Go File" />
+        <option value="Python Script" />
         <option value="Kotlin Class" />
       </list>
     </option>
   </component>
-  <component name="GOROOT" url="file://D:/AppData/GoLang/GoLang_1.18.1" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="MIXED" />
+  </component>
+  <component name="GithubDefaultAccount">
+    <option name="defaultAccountId" value="69b9ba04-b198-43f7-99ce-35826806d426" />
   </component>
   <component name="GoLibraries">
-    <option name="urls">
-      <list>
-        <option value="file://$PROJECT_DIR$/asoj-judger" />
-      </list>
-    </option>
+    <option name="indexEntireGoPath" value="false" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Core/src/main/kotlin/io/github/Application.kt" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Core/src/main/kotlin/io/github/illusson/scitoj/admin/controller/ProblemController.kt" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/core/spring/config/CurrentConfig.kt" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Core/src/main/kotlin/io/github/sgpublic/aidescit/api/core/spring/config/SecurityConfig.kt" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="JpbToolWindowState">
     <option name="myId2FirstActivated">
@@ -128,11 +138,14 @@
     </option>
     <option name="myId2Visible">
       <map>
-        <entry key="com.haulmont.jpb.jpaInspector" value="true" />
-        <entry key="com.haulmont.jpb.jpaPalette" value="true" />
+        <entry key="com.haulmont.jpb.jpaInspector" value="false" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="false" />
         <entry key="com.haulmont.jpb.jpaStructure" value="false" />
       </map>
     </option>
+  </component>
+  <component name="KotlinCodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -140,7 +153,7 @@
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
-  <component name="ProjectId" id="28agbQR8FcV4aETMuP1fXKwx4wV" />
+  <component name="ProjectId" id="28mZRLiCxp2v6XDdg1hDFZ6UruM" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
   </component>
@@ -148,112 +161,140 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultGoTemplateProperty": "Go File",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.go.format.on.save.advertiser.fired": "true",
-    "RunOnceActivity.go.formatter.settings.were.checked": "true",
-    "RunOnceActivity.go.migrated.go.modules.settings": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "configurable..is.expanded": "true",
-    "configurable.GoLibrariesConfigurable.is.expanded": "true",
-    "go.import.settings.migrated": "true",
-    "jdk.selected.JAVA_MODULE": "1.8",
-    "last_opened_file_path": "E:/Documents/JetBrains/InteliJ IDEA/SCITOJ/SCITOJ_Backend/bin",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "nodejs_interpreter_path": "node",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "com.goide.configuration.GoLibrariesConfigurableProvider",
-    "spring.configuration.checksum": "e2e18e977df2d6c431cc67914b1027dd",
-    "ts.external.directory.path": "E:\\Documents\\JetBrains\\InteliJ IDEA\\AideSCIT_OJ\\asoj-frontend\\node_modules\\typescript\\lib"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.format.on.save.advertiser.fired&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Users/Documents/JetBrains/IntelliJ IDEA/SCITOJ/SCITOJ_Backend/Core/src/test/resources&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;e2e18e977df2d6c431cc67914b1027dd&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mariadb&quot;
+    ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\Documents\JetBrains\InteliJ IDEA\SCITOJ\SCITOJ_Backend\bin" />
-      <recent name="E:\Documents\JetBrains\InteliJ IDEA\SCITOJ\SCITOJ_Backend\Core\src\main\resources" />
-      <recent name="E:\Documents\JetBrains\InteliJ IDEA\SCITOJ\SCITOJ_Backend\Core\src\main\kotlin\io\github\sgpublic\aidescit\api\data" />
-      <recent name="E:\Documents\JetBrains\InteliJ IDEA\SCITOJ\SCITOJ_Backend\Core\src\main\kotlin\io\github\sgpublic\aidescit\api\mariadb\ids" />
-      <recent name="E:\Documents\JetBrains\InteliJ IDEA\SCITOJ\SCITOJ_Backend\Core\src\main\kotlin\io\github\sgpublic\aidescit\api\mariadb\domain" />
+      <recent name="D:\Users\Documents\JetBrains\IntelliJ IDEA\SCITOJ\SCITOJ_Backend\Core\src\test\resources" />
+      <recent name="E:\Documents\JetBrains\InteliJ IDEA\SCITOJ\SCITOJ_Backend\Core\bin" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\Documents\JetBrains\InteliJ IDEA\AideSCIT_OJ\asoj-frontend\src\pages\home\" />
-      <recent name="E:\Documents\JetBrains\InteliJ IDEA\AideSCIT_OJ\asoj-frontend\src\pages\App" />
-      <recent name="E:\Documents\JetBrains\InteliJ IDEA\AideSCIT_OJ\asoj-react" />
-      <recent name="E:\Documents\JetBrains\InteliJ IDEA\AideSCIT_OJ\asoj-judger\src\asoj" />
-      <recent name="E:\Documents\JetBrains\InteliJ IDEA\AideSCIT_OJ\asoj-springboot" />
-    </key>
-    <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
-      <recent name="io.github.sgpublic.aidescit.api" />
+      <recent name="D:\Users\Documents\JetBrains\IntelliJ IDEA\SCITOJ\SCITOJ_Backend\Core\bin\config" />
     </key>
     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
-      <recent name="io.github.illusson.scitoj.data" />
+      <recent name="io.github.sgpublic.aidescit.api.core.spring.security" />
     </key>
   </component>
-  <component name="RunManager" selected="Kotlin.Application">
-    <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
-      <working_directory value="$PROJECT_DIR$" />
-      <go_parameters value="-i" />
-      <kind value="FILE" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.Debug">
+    <configuration name="JwtTest" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":Core:test" />
+            <option value="--tests" />
+            <option value="&quot;io.github.illusson.scitoj.JwtTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration default="true" type="GoTestRunConfiguration" factoryName="Go Test">
-      <working_directory value="$PROJECT_DIR$" />
-      <go_parameters value="-i" />
-      <kind value="DIRECTORY" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <framework value="gotest" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Application" type="JetRunConfigurationType" nameIsGenerated="true">
-      <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="MAIN_CLASS_NAME" value="io.github.illusson.scitoj.Application" />
+    <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <option name="ACTIVE_PROFILES" />
       <module name="SCITOJ_Backend.Core.main" />
-      <option name="PROGRAM_PARAMETERS" value="--deubg" />
-      <shortenClasspath name="NONE" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/bin" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="io.github.Application" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/Core/bin" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Debug" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <option name="ACTIVE_PROFILES" />
+      <module name="SCITOJ_Backend.Core.main" />
+      <option name="PROGRAM_PARAMETERS" value="--debug" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="io.github.Application" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/Core/bin" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
-      <item itemvalue="Gradle.bootJar" />
-      <item itemvalue="Kotlin.Application" />
+      <item itemvalue="Gradle.JwtTest" />
+      <item itemvalue="Spring Boot.Debug" />
+      <item itemvalue="Spring Boot.Application" />
     </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="e605ef4e-44e6-4cb2-a7c7-d6c589b1790a" name="Changes" comment="" />
-      <created>1651460182310</created>
+      <changelist id="b9fdfa93-7737-47ea-9fd9-8ffbdd438f71" name="Changes" comment="" />
+      <created>1651823714710</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1651460182310</updated>
-      <workItem from="1651460183880" duration="7211000" />
-      <workItem from="1651467843924" duration="6357000" />
-      <workItem from="1651478293613" duration="1523000" />
-      <workItem from="1651492712847" duration="3278000" />
-      <workItem from="1651496900034" duration="5490000" />
-      <workItem from="1651537327676" duration="25368000" />
-      <workItem from="1651588319142" duration="1095000" />
-      <workItem from="1651653867516" duration="681000" />
-      <workItem from="1651660517885" duration="1196000" />
-      <workItem from="1651663002847" duration="1854000" />
-      <workItem from="1651664917889" duration="872000" />
-      <workItem from="1651665807544" duration="21000" />
-      <workItem from="1651665844602" duration="1319000" />
+      <updated>1651823714710</updated>
+      <workItem from="1651823717304" duration="387000" />
+      <workItem from="1651824188160" duration="2912000" />
+      <workItem from="1651840874676" duration="748000" />
+      <workItem from="1651900384296" duration="18741000" />
+      <workItem from="1651928426878" duration="55000" />
+      <workItem from="1651981112799" duration="148000" />
+      <workItem from="1651991067588" duration="7723000" />
+      <workItem from="1652079277808" duration="746000" />
+      <workItem from="1652080095836" duration="1023000" />
+      <workItem from="1652081239357" duration="1351000" />
+      <workItem from="1652086376730" duration="928000" />
+      <workItem from="1652142254044" duration="2753000" />
+      <workItem from="1652145115266" duration="9426000" />
+      <workItem from="1652164372722" duration="9473000" />
+      <workItem from="1652228385020" duration="6954000" />
+      <workItem from="1652251306000" duration="6100000" />
+      <workItem from="1652315361179" duration="11043000" />
+      <workItem from="1652688791645" duration="94000" />
     </task>
+    <task id="LOCAL-00001" summary="add SpringSecurity implementation and login bug fixed.">
+      <created>1652173877046</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1652173877046</updated>
+    </task>
+    <task id="LOCAL-00002" summary="add Jwt implementation">
+      <created>1652322525166</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1652322525166</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -271,12 +312,13 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <ignored-roots>
-      <path value="$PROJECT_DIR$" />
-    </ignored-roots>
+    <MESSAGE value="add SpringSecurity implementation and login bug fixed." />
+    <MESSAGE value="add Jwt implementation" />
+    <MESSAGE value="add Jwt &amp; SpringSecurity impl and login bug fix." />
+    <MESSAGE value="add Jwt &amp; SpringSecurity impl, login bug fix." />
+    <option name="LAST_COMMIT_MESSAGE" value="add Jwt &amp; SpringSecurity impl, login bug fix." />
   </component>
   <component name="VgoProject">
-    <integration-enabled>false</integration-enabled>
     <settings-migrated>true</settings-migrated>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">

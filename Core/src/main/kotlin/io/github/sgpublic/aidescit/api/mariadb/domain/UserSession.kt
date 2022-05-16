@@ -1,7 +1,7 @@
 package io.github.sgpublic.aidescit.api.mariadb.domain
 
 import io.github.sgpublic.aidescit.api.module.APIModule
-import java.io.Serializable
+import org.springframework.security.core.GrantedAuthority
 import javax.persistence.*
 
 /**
@@ -9,7 +9,7 @@ import javax.persistence.*
  */
 @Entity
 @Table(name = "user_session")
-class UserSession: Serializable {
+class UserSession: GrantedAuthority {
     @Id
     @Column(name = "u_id")
     var id: String = ""
@@ -36,7 +36,7 @@ class UserSession: Serializable {
     var effective: Short = 1
 
     @Transient
-    var identify: Short = 0
+    var identify: Int = 0
 
     @Transient
     var verifyLocation: String = ""
@@ -57,5 +57,10 @@ class UserSession: Serializable {
             APIModule.Cookies.ROUTE to route,
             APIModule.Cookies.SESSION_ID to session
         )
+    }
+
+    @Transient
+    override fun getAuthority(): String {
+        return getCookie().toString()
     }
 }

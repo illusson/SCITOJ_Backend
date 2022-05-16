@@ -1,19 +1,27 @@
-package io.github.illusson.scitoj
+package io.github
 
+import io.github.sgpublic.aidescit.api.core.spring.config.CurrentConfig
+import io.github.sgpublic.aidescit.api.core.spring.config.SecurityConfig
 import io.github.sgpublic.aidescit.api.core.util.ArgumentReader
 import io.github.sgpublic.aidescit.api.core.util.Log
 import io.github.sgpublic.aidescit.api.exceptions.ServerRuntimeException
+import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.builder.SpringApplicationBuilder
 import org.springframework.boot.runApplication
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.ApplicationContext
+import org.springframework.context.annotation.Import
 
 /**
  * @author sgpublic
  * @date 2022/5/2 13:36
  */
+@SpringBootApplication
+@Import(CurrentConfig::class, SecurityConfig::class)
 class Application {
     companion object {
+        const val PROJECT_NAME = "scitoj"
+
         /** 启动入口 */
         @JvmStatic
         fun main(args: Array<String>) {
@@ -50,17 +58,13 @@ class Application {
 
         /** 初始化参数 */
         private fun setup(args: Array<String>): Array<String> {
-            val argsCurrent = arrayListOf<String>()
-            argsCurrent.addAll(args)
+            val argsCurrent = arrayListOf(*args)
             val reader = ArgumentReader(args)
             debug = reader.containsItem("--debug")
+
             if (reader.getString("--spring.profiles.active", null) == null) {
                 val arg = StringBuilder("--spring.profiles.active=")
-                if (debug){
-                    arg.append("dev")
-                } else {
-                    arg.append("pro")
-                }
+                if (debug) arg.append("dev") else arg.append("pro")
                 argsCurrent.add(arg.toString())
             }
             return Array(argsCurrent.size) {

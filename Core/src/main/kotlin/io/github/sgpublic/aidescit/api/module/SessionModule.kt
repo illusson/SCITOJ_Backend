@@ -1,9 +1,6 @@
 package io.github.sgpublic.aidescit.api.module
 
-import io.github.sgpublic.aidescit.api.core.util.Log
-import io.github.sgpublic.aidescit.api.core.util.RSAUtil
-import io.github.sgpublic.aidescit.api.core.util.advMapOf
-import io.github.sgpublic.aidescit.api.core.util.jsonBody
+import io.github.sgpublic.aidescit.api.core.util.*
 import io.github.sgpublic.aidescit.api.exceptions.InvalidPasswordFormatException
 import io.github.sgpublic.aidescit.api.exceptions.ServerRuntimeException
 import io.github.sgpublic.aidescit.api.exceptions.UserNotFoundException
@@ -33,19 +30,37 @@ class SessionModule {
      * @throws InvalidPasswordFormatException 参数 [password] 未加盐时抛出
      */
     fun get(username: String, password: String? = null): UserSession {
-        return userSession.getUserSession(username)?.takeIf {
-            it.isEffective() && !it.isExpired() && checkSession(username, it)
-        } ?: refreshSession(username, password)
+        val session: UserSession? = userSession.getUserSession(username)
+
+        if (session == null) {
+            if (password == null) {
+                throw UserNotFoundException()
+            }
+            return refreshSession(username, password)
+        }
+        if (session.isEffective() && !session.isExpired()
+            && checkSession(session)) {
+            if (password == null) {
+                return session
+            }
+            val post = RSAUtil.decode(password).substring(8)
+            val save = RSAUtil.decode(session.password).substring(8)
+            if (post != save) {
+                throw WrongPasswordException(username)
+            }
+            return session
+        }
+        return refreshSession(username, password ?: session.password)
     }
 
     /**
-     * 检查 ASP.NET_SessionId 是否有效
+     * 检查 ASP.NET_SessionId 和 route 是否有效
      * @param username 用户学号/工号
      * @param session UserSession
      */
-    private fun checkSession(username: String, session: UserSession): Boolean {
+    private fun checkSession(session: UserSession): Boolean {
         return try {
-            val url = "http://218.6.163.93:8081/xs_main.aspx?xh=$username"
+            val url = "http://218.6.163.93:8081/xs_main.aspx?xh=${session.id}"
             APIModule.executeDocument(
                 url = url,
                 headers = APIModule.buildHeaders(
@@ -54,7 +69,7 @@ class SessionModule {
                 cookies = session.getCookie(),
                 method = APIModule.METHOD_GET
             ).select("#icode").isEmpty()
-        } catch (e: ServerRuntimeException){ false }
+        } catch (_: ServerRuntimeException){ false }
     }
 
     private final val route: Pattern = Pattern.compile("route=[a-z0-9]{32}")
@@ -62,16 +77,15 @@ class SessionModule {
     /**
      * 从教务系统获取新的登录令牌
      * @param username 用户学号/工号
-     * @param password 用户加盐密文密码，若传入 null 则从数据库调取已有数据
+     * @param password 用户加盐密文密码
      * @return 返回 [UserSession]
      */
-    private fun refreshSession(username: String, password: String?): UserSession {
+    private fun refreshSession(username: String, password: String): UserSession {
         Log.d("刷新 ASP.NET_SessionId", username)
-        val pwd: String = password
-            ?: userSession.getUserPassword(username)
-            ?: throw UserNotFoundException()
-        val passwordDecrypted = RSAUtil.decode(pwd).apply {
-            if (length <= 8){
+        val passwordDecrypted = password.let {
+            return@let RSAUtil.decode(it)
+        }.also {
+            if (it.length <= 8){
                 throw InvalidPasswordFormatException()
             }
         }.substring(8)
@@ -106,27 +120,27 @@ class SessionModule {
         ).closeQuietly()
 
         result.id = username
-        result.password = pwd
+        result.password = password
         userSession.save(result)
         return result
     }
 
     /** 办事大厅返回数据序列化 */
     private val respClass = object {
-        var code: String = ""
+        val code: String = ""
         val content = object {
-            var ticket: String = ""
-            var token: String = ""
-            var redirectUrl: String = ""
+            val ticket: String = ""
+            val token: String = ""
+            val redirectUrl: String = ""
         }
-    }.javaClass
+    }::class
     /**
      * 从办事大厅获取教务系统跳转链接
      * @param username 用户学号/工号
-     * @param password 用户明文密码，若传入 null 则从数据库调取已有数据
+     * @param password 用户明文密码
      * @return 返回 [UserSession]
      */
-    fun getSpringboardLocation(username: String, password: String? = null): UserSession {
+    fun getSpringboardLocation(username: String, password: String): UserSession {
         val result = UserSession()
 
         val param1 = advMapOf(
@@ -156,16 +170,9 @@ class SessionModule {
             return@let it.content.ticket
         }
 
-        val pwd: String = password ?: userSession.getUserPassword(username)?.run {
-            return@run RSAUtil.decode(this).apply {
-                if (length <= 8){
-                    throw InvalidPasswordFormatException()
-                }
-            }.substring(8)
-        } ?: throw UserNotFoundException()
         val param2 = advMapOf(
             "universityId" to 100831,
-            "password" to pwd,
+            "password" to password,
             "appKey" to "uap-web-key",
             "timestamp" to APIModule.TS_FULL,
             "nonce" to APIModule.NONCE,

@@ -18,6 +18,7 @@ configurations {
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-security")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
@@ -33,6 +34,12 @@ dependencies {
     implementation("com.google.code.gson:gson:2.9.0")
     // html 解析
     implementation("org.jsoup:jsoup:1.14.3")
+
+    // jwt
+    val jwtVer = "0.11.5"
+    implementation("io.jsonwebtoken:jjwt-api:$jwtVer")
+    runtimeOnly("io.jsonwebtoken:jjwt-impl:$jwtVer")
+    runtimeOnly("io.jsonwebtoken:jjwt-gson:$jwtVer")
 }
 
 /** 打包后自动定位打包文件 */

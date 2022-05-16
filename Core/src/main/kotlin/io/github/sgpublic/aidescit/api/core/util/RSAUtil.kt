@@ -1,6 +1,7 @@
 package io.github.sgpublic.aidescit.api.core.util
 
 import io.github.sgpublic.aidescit.api.core.spring.property.KeyProperty
+import io.github.sgpublic.aidescit.api.exceptions.InvalidPasswordFormatException
 import org.springframework.context.annotation.DependsOn
 import javax.crypto.Cipher
 
@@ -51,5 +52,13 @@ object RSAUtil {
      */
     fun encode(src: String, cp: Cipher): String {
         return Base64Util.encodeToString(cp.doFinal(src.toByteArray(Charsets.UTF_8)))
+    }
+
+    fun decodePassword(password: String): String {
+        return decode(password).apply {
+            if (length <= 8){
+                throw InvalidPasswordFormatException()
+            }
+        }.substring(8)
     }
 }

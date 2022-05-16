@@ -13,4 +13,8 @@ class SuccessResult(vararg pairs: Pair<String, Any>) : AdvMap() {
         put("message", "success.")
         putAll(*pairs)
     }
+
+    companion object {
+        val LOGOUT: SuccessResult = SuccessResult()
+    }
 }
