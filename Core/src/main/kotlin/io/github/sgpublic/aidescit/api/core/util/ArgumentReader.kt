@@ -16,13 +16,13 @@ class ArgumentReader(args: Array<String>) {
          * @param map 请求传入的表单
          * @return 返回按 key 排序的键值对集合
          */
-        fun readRequestMap(map: Map<String, Array<String>>): Map<String, String> {
+        fun readRequestMap(map: Map<String, String>): Map<String, String> {
             val result = mutableMapOf<String, String>()
             for ((key, values) in map.toSortedMap()) {
                 if (values.isNullOrEmpty()){
                     continue
                 }
-                result[key] = values[0]
+                result[key] = values
             }
             return result
         }

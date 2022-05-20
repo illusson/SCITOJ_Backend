@@ -2,9 +2,9 @@ package io.github.sgpublic.aidescit.api.core.spring.security
 
 import io.github.sgpublic.aidescit.api.core.util.Log
 import io.github.sgpublic.aidescit.api.core.util.writeJson
-import io.github.sgpublic.aidescit.api.exceptions.InvalidPasswordFormatException
-import io.github.sgpublic.aidescit.api.exceptions.WrongPasswordException
-import io.github.sgpublic.aidescit.api.result.FailedResult
+import io.github.sgpublic.aidescit.api.dto.FailedResult
+import org.springframework.security.authentication.AuthenticationServiceException
+import org.springframework.security.authentication.BadCredentialsException
 import org.springframework.security.core.AuthenticationException
 import org.springframework.security.web.authentication.AuthenticationFailureHandler
 import org.springframework.stereotype.Component
@@ -24,11 +24,11 @@ class AidescitAuthenticationFailureHandler: AuthenticationFailureHandler {
     ) {
         Log.d("登陆失败", exception)
         when(exception) {
-            is WrongPasswordException -> {
+            is BadCredentialsException -> {
                 response.writeJson(FailedResult.WRONG_ACCOUNT)
             }
-            is InvalidPasswordFormatException -> {
-                response.writeJson(FailedResult.WRONG_ACCOUNT)
+            is AuthenticationServiceException -> {
+                response.writeJson(FailedResult.UNSUPPORTED_REQUEST)
             }
             else -> {
                 response.writeJson(FailedResult.INTERNAL_SERVER_ERROR)

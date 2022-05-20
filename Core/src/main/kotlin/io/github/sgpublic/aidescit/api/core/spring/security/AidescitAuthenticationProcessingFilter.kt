@@ -7,7 +7,6 @@ import org.springframework.security.authentication.ProviderManager
 import org.springframework.security.core.Authentication
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher
-import org.springframework.stereotype.Component
 import org.springframework.web.util.ContentCachingRequestWrapper
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
@@ -16,13 +15,12 @@ import javax.servlet.http.HttpServletResponse
  * @author sgpublic
  * @date 2022/5/5 15:07
  */
-@Component
 class AidescitAuthenticationProcessingFilter(
     successHandler: AidescitAuthenticationSuccessHandler,
     failedHandler: AidescitAuthenticationFailureHandler,
     provider: AidescitAuthenticationProvider
 ): AbstractAuthenticationProcessingFilter(
-    AntPathRequestMatcher("/aidescit/login", "POST"),
+    AntPathRequestMatcher("/aidescit/login"),
     ProviderManager(provider)
 ) {
     init {
@@ -33,6 +31,7 @@ class AidescitAuthenticationProcessingFilter(
     private val loginRequest = object {
         var username: String = ""
         var password: String = ""
+        var ts: Long = -1
     }::class
     override fun attemptAuthentication(request: HttpServletRequest,
                                        response: HttpServletResponse): Authentication {
@@ -49,7 +48,7 @@ class AidescitAuthenticationProcessingFilter(
         if (req.username == "" || req.password == "") {
             throw BadCredentialsException("Empty username or password.")
         }
-        val auth = AidescitAuthenticationToken(req.username, req.password)
+        val auth = AidescitAuthenticationToken(req.username, req.password, ts = req.ts)
         return authenticationManager.authenticate(auth)
     }
 }

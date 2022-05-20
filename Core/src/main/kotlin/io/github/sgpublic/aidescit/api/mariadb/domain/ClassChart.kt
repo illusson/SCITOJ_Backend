@@ -21,11 +21,11 @@ class ClassChart: Serializable {
 
     @Id
     @Column(name = "c_id")
-    var classId: Short = 0
+    var classId: Int = 0
 
     @Id
     @Column(name = "grade")
-    var grade: Short = 0
+    var grade: Int = 0
 
     @Column(name = "c_name")
     var name: String = ""

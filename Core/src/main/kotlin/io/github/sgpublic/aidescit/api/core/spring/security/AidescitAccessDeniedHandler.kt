@@ -1,7 +1,7 @@
 package io.github.sgpublic.aidescit.api.core.spring.security
 
 import io.github.sgpublic.aidescit.api.core.util.writeJson
-import io.github.sgpublic.aidescit.api.result.FailedResult
+import io.github.sgpublic.aidescit.api.dto.FailedResult
 import org.springframework.security.access.AccessDeniedException
 import org.springframework.security.web.access.AccessDeniedHandler
 import javax.servlet.http.HttpServletRequest

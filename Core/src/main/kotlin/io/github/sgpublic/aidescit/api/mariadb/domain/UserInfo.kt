@@ -1,7 +1,6 @@
 package io.github.sgpublic.aidescit.api.mariadb.domain
 
 import io.github.sgpublic.aidescit.api.core.spring.security.AidescitAuthority
-import io.github.sgpublic.aidescit.api.data.ClassInfo
 import io.github.sgpublic.aidescit.api.module.APIModule
 import org.springframework.security.core.GrantedAuthority
 import javax.persistence.*
@@ -35,22 +34,28 @@ class UserInfo: ClassInfo(), GrantedAuthority {
     override var specialty: Int = 0
 
     @Column(name = "u_class")
-    override var classId: Short = 0
+    override var classId: Int = 0
 
     @Column(name = "u_grade")
-    override var grade: Short = 0
+    override var grade: Int = 0
 
     @Column(name = "u_info_expired")
     var expired: Long = APIModule.TS + 1296000
 
     @Transient
     fun isTeacher(): Boolean {
-        return identify.compareTo(0) != 0
+        return identify != 0
     }
 
     @Transient
     fun isStudent(): Boolean {
-        return identify.compareTo(0) == 0
+        return identify == 0
+    }
+
+    @get:Transient
+    val IS_ADMIN: Boolean get() {
+        return role == AidescitAuthority.ADMIN_AUTHORITY
+                || role == AidescitAuthority.GUEST_AUTHORITY
     }
 
     @Transient
@@ -58,13 +63,10 @@ class UserInfo: ClassInfo(), GrantedAuthority {
 
     @Transient
     override fun getAuthority(): String {
-        return role
+        return "role_$role"
     }
 
     companion object {
-        @JvmStatic
-        val GUEST: UserInfo get() = UserInfo()
-
         @JvmStatic
         val IDENTIFIES = arrayOf("同学", "老师")
     }
@@ -92,4 +94,25 @@ class UserInfo: ClassInfo(), GrantedAuthority {
 //
 //    @Transient
 //    override fun isEnabled(): Boolean = true
+}
+
+/**
+ * 可选参数封装
+ * @param faculty 学院代码
+ * @param specialty 专业代码
+ * @param classId 班级代码
+ */
+@Suppress("KDocUnresolvedReference")
+open class ClassInfo {
+    open var faculty: Int = -1
+
+    open var specialty: Int = -1
+
+    open var grade: Int = -1
+
+    open var classId: Int = -1
+
+    fun isNull(): Boolean {
+        return faculty < 0 || specialty < 0 || grade < 0 || classId < 0
+    }
 }

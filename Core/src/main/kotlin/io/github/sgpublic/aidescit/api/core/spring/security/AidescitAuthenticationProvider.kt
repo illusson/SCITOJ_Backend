@@ -1,5 +1,6 @@
 package io.github.sgpublic.aidescit.api.core.spring.security
 
+import io.github.sgpublic.aidescit.api.module.APIModule
 import io.github.sgpublic.aidescit.api.module.SessionModule
 import io.github.sgpublic.aidescit.api.module.UserInfoModule
 import org.springframework.beans.factory.annotation.Autowired
@@ -22,13 +23,15 @@ class AidescitAuthenticationProvider: AuthenticationProvider {
 
     override fun authenticate(authentication: Authentication): Authentication {
         try {
-            val username = authentication.principal as String
-            val password = authentication.credentials as String
-            session.get(username, password)
+            authentication as AidescitAuthenticationToken
+            val username = authentication.principal
+            val password = authentication.credentials
+            val ts = authentication.ts
+            session.get(username, password, ts)
             return AidescitAuthenticationToken(
-                username, password, info.get(username)
+                username, password, info.get(username), APIModule.TS_FULL
             )
-        } catch (e: NullPointerException) {
+        } catch (e: Exception) {
             throw BadCredentialsException("登录失败", e)
         }
     }

@@ -2,8 +2,8 @@ package io.github.sgpublic.aidescit.api.core.spring.security
 
 import io.github.sgpublic.aidescit.api.core.util.JwtUtil
 import io.github.sgpublic.aidescit.api.core.util.writeJson
+import io.github.sgpublic.aidescit.api.dto.response.AccessTokenDto
 import io.github.sgpublic.aidescit.api.module.APIModule
-import io.github.sgpublic.aidescit.api.result.SuccessResult
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.Authentication
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler
@@ -34,8 +34,6 @@ class AidescitAuthenticationSuccessHandler: AuthenticationSuccessHandler {
             .build()
 
         response.setHeader("Set-Cookie", cookie.toString())
-        response.writeJson(SuccessResult(
-            "access_token" to token
-        ))
+        response.writeJson(AccessTokenDto(token))
     }
 }

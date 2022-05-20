@@ -26,6 +26,6 @@ interface ClassChartRepository: JpaRepository<ClassChart, ClassChartIds> {
     )
     fun getClassName(
         @Param("f") faculty: Int, @Param("s") specialty: Int,
-        @Param("c") classId: Short, @Param("g") grade: Short
+        @Param("c") classId: Int, @Param("g") grade: Int
     ): String?
 }

@@ -11,9 +11,16 @@ import javax.crypto.Cipher
 @DependsOn("keyProperty")
 object RSAUtil {
     @JvmStatic
-    private val pri: Cipher get() {
+    private val PRIVATE_CI: Cipher get() {
         val cp = Cipher.getInstance("RSA/ECB/PKCS1Padding")
         cp.init(Cipher.DECRYPT_MODE, KeyProperty.PRIVATE_KEY)
+        return cp
+    }
+
+    @JvmStatic
+    val PUBLIC_CI: Cipher get() {
+        val cp = Cipher.getInstance("RSA/ECB/PKCS1Padding")
+        cp.init(Cipher.ENCRYPT_MODE, KeyProperty.PUBLIC_KEY)
         return cp
     }
 
@@ -23,7 +30,7 @@ object RSAUtil {
      * @return 返回解密的文本
      */
     fun decode(src: String): String {
-        return decode(src, pri)
+        return decode(src, PRIVATE_CI)
     }
 
     /**
@@ -42,7 +49,7 @@ object RSAUtil {
      * @return 返回解密的文本
      */
     fun encode(src: String): String {
-        return Base64Util.encodeToString(pri.doFinal(src.toByteArray(Charsets.UTF_8)))
+        return Base64Util.encodeToString(PRIVATE_CI.doFinal(src.toByteArray(Charsets.UTF_8)))
     }
 
     /**

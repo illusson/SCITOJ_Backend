@@ -1,0 +1,2 @@
+# 生成 sign 所需的 secret，建议设置为 32 位 16 进制字符串
+aidescit.sign.app-secret=

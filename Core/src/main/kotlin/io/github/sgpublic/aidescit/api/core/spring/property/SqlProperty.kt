@@ -50,7 +50,7 @@ class SqlProperty {
         try {
             password = Base64Util.decodeToString(value)
         } catch (e: Exception){
-            Log.f("请将 aidescit.datasource.password 设置为经 Base64 加密后的字符串")
+            Log.f("aidescit.datasource.password 解析失败")
         }
     }
 }

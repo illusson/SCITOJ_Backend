@@ -1,12 +1,13 @@
 package io.github.sgpublic.aidescit.api.core.spring.security
 
 import io.github.sgpublic.aidescit.api.mariadb.domain.UserInfo
+import io.github.sgpublic.aidescit.api.module.APIModule
 import org.springframework.security.authentication.AbstractAuthenticationToken
 import org.springframework.security.core.GrantedAuthority
 
 class AidescitAuthenticationToken(
     private val username: String, private val password: String,
-    val authentication: UserInfo? = null
+    val authentication: UserInfo? = null, val ts: Long = APIModule.TS_FULL
 ) : AbstractAuthenticationToken(
     arrayListOf<GrantedAuthority>().also { array ->
         authentication?.let { array.add(it) }

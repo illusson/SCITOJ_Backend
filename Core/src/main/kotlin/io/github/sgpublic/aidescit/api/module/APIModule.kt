@@ -3,7 +3,6 @@ package io.github.sgpublic.aidescit.api.module
 import com.google.gson.Gson
 import io.github.Application
 import io.github.sgpublic.aidescit.api.core.util.*
-import io.github.sgpublic.aidescit.api.data.ViewStateDocument
 import io.github.sgpublic.aidescit.api.exceptions.ServerRuntimeException
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaType
@@ -313,4 +312,4 @@ object APIModule {
 }
 
 val Headers.Companion.CONTENT_TYPE: String get() = "Content-Type"
-val Headers.Companion.JSON_UTF_8: String get() = "text/json; charset=UTF-8"
+val Headers.Companion.JSON_UTF_8: String get() = "application/json;charset=UTF-8"

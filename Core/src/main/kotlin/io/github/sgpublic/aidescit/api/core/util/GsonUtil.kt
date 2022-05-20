@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 import kotlin.reflect.KClass
 
-private val GSON: Gson = GsonBuilder().disableHtmlEscaping().create()
+public val GSON: Gson = GsonBuilder().disableHtmlEscaping().create()
 
 @Transient
 fun <T: Any> KClass<T>.fromGson(src: String): T {
@@ -30,7 +30,9 @@ fun <T: Any> Response.jsonBody(clazz: KClass<T>): T {
 }
 
 fun Response.textBody(): String {
-    return this.body?.string().toString()
+    val body = this.body?.string().toString()
+    this.body?.closeQuietly()
+    return body
 }
 
 fun <T: Any> HttpServletResponse.writeJson(src: T) {

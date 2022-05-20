@@ -3,7 +3,7 @@ package io.github.sgpublic.aidescit.api.core.spring.security
 import io.github.sgpublic.aidescit.api.core.util.Log
 import io.github.sgpublic.aidescit.api.core.util.writeJson
 import io.github.sgpublic.aidescit.api.exceptions.WrongPasswordException
-import io.github.sgpublic.aidescit.api.result.FailedResult
+import io.github.sgpublic.aidescit.api.dto.FailedResult
 import org.springframework.security.core.AuthenticationException
 import org.springframework.security.web.AuthenticationEntryPoint
 import javax.servlet.http.HttpServletRequest
@@ -19,7 +19,7 @@ class AidescitAuthenticationEntryPoint: AuthenticationEntryPoint {
         response: HttpServletResponse,
         authException: AuthenticationException
     ) {
-        Log.d("登录失败", authException)
+        Log.d("登录处理失败", authException)
         val out = when (authException) {
             is WrongPasswordException -> {
                 FailedResult.WRONG_ACCOUNT

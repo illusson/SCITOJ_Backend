@@ -2,6 +2,7 @@ package io.github
 
 import io.github.sgpublic.aidescit.api.core.spring.config.CurrentConfig
 import io.github.sgpublic.aidescit.api.core.spring.config.SecurityConfig
+import io.github.sgpublic.aidescit.api.core.spring.config.OpenDocConfig
 import io.github.sgpublic.aidescit.api.core.util.ArgumentReader
 import io.github.sgpublic.aidescit.api.core.util.Log
 import io.github.sgpublic.aidescit.api.exceptions.ServerRuntimeException
@@ -17,16 +18,18 @@ import org.springframework.context.annotation.Import
  * @date 2022/5/2 13:36
  */
 @SpringBootApplication
-@Import(CurrentConfig::class, SecurityConfig::class)
+@Import(CurrentConfig::class, SecurityConfig::class, OpenDocConfig::class)
 class Application {
     companion object {
+        const val PRO_PORT = "8088"
+        const val DEV_PORT = "18088"
         const val PROJECT_NAME = "scitoj"
 
         /** 启动入口 */
         @JvmStatic
         fun main(args: Array<String>) {
             context = runApplication<Application>(*setup(args))
-            Log.i("服务启动成功！")
+            Log.w("服务启动成功！")
         }
 
         /** 是否为 Debug 环境 */
@@ -67,6 +70,9 @@ class Application {
                 if (debug) arg.append("dev") else arg.append("pro")
                 argsCurrent.add(arg.toString())
             }
+
+            System.setProperty("server.port", if (debug) DEV_PORT else PRO_PORT)
+
             return Array(argsCurrent.size) {
                 return@Array argsCurrent[it]
             }

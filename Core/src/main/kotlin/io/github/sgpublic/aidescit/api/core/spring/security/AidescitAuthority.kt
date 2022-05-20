@@ -32,5 +32,9 @@ class AidescitAuthority private constructor(
             ADMIN_AUTHORITY to "管理员",
             GOD_AUTHORITY to "超级管理员",
         )
+
+        const val AUTHORIZE_UP_USER = "hasAnyRole(\"$USER_AUTHORITY\", \"$ADMIN_AUTHORITY\", \"$GOD_AUTHORITY\")"
+        const val AUTHORIZE_UP_ADMIN = "hasAnyRole(\"$ADMIN_AUTHORITY\", \"$GOD_AUTHORITY\")"
+        const val AUTHORIZE_UP_GOD = "hasRole(\"$GOD_AUTHORITY\")"
     }
 }

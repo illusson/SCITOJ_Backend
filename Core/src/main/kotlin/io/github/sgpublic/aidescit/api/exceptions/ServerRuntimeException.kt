@@ -13,5 +13,7 @@ class ServerRuntimeException(msg: String): Exception(msg) {
         val VIEWSTATE_GENERATOR_NOT_FOUND get() = ServerRuntimeException("__VIEWSTATEGENERATOR 获取失败")
         @JvmStatic
         val INTERNAL_ERROR get() = ServerRuntimeException("服务器内部错误")
+        @JvmStatic
+        val UNKNOWN_CONTENT_TYPE get() = ServerRuntimeException("未知 Content-Type")
     }
 }

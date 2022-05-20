@@ -1,10 +1,12 @@
 package io.github.sgpublic.aidescit.api.core.spring.config
 
 import io.github.Application
+import io.github.sgpublic.aidescit.api.core.spring.filter.SignFilter
 import io.github.sgpublic.aidescit.api.core.spring.security.*
+import io.github.sgpublic.aidescit.api.module.SessionModule
+import io.github.sgpublic.aidescit.api.module.UserInfoModule
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Configuration
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
@@ -20,18 +22,14 @@ import org.springframework.security.web.context.NullSecurityContextRepository
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 class SecurityConfig: WebSecurityConfigurerAdapter() {
-    @Autowired
-    private lateinit var provider: AidescitAuthenticationProvider
+    private val whiteList: Array<String> = arrayOf(
+        "/favicon.ico",
+        "/openapi/**",
 
-    override fun configure(auth: AuthenticationManagerBuilder) {
-        // 自定义登录处理
-        auth.authenticationProvider(provider)
-    }
+        "/aidescit/public_key",
+        "/api/problem/list"
+    )
 
-    @Autowired
-    private lateinit var tokenFilter: AidescitTokenFilter
-    @Autowired
-    private lateinit var processingFilter: AidescitAuthenticationProcessingFilter
     override fun configure(http: HttpSecurity) {
         http.cors().disable()
             .also {
@@ -40,12 +38,14 @@ class SecurityConfig: WebSecurityConfigurerAdapter() {
                 }
             }
 
-        // 自定义登录处理和 Token 识别
-        http.addFilterBefore(processingFilter, UsernamePasswordAuthenticationFilter::class.java)
-            .addFilterAfter(tokenFilter, AidescitAuthenticationProcessingFilter::class.java)
-
         http.authorizeRequests()
+            .antMatchers(*whiteList).permitAll()
             .anyRequest().authenticated()
+
+        // 自定义登录处理和 Token 识别
+        http.addFilterBefore(processingFilter(), UsernamePasswordAuthenticationFilter::class.java)
+            .addFilterAfter(tokenFilter(), AidescitAuthenticationProcessingFilter::class.java)
+            .addFilterBefore(signFilter(), AidescitAuthenticationProcessingFilter::class.java)
 
         // 自定义登出
         http.logout()
@@ -62,5 +62,27 @@ class SecurityConfig: WebSecurityConfigurerAdapter() {
         http.exceptionHandling()
             .authenticationEntryPoint(AidescitAuthenticationEntryPoint())
             .accessDeniedHandler(AidescitAccessDeniedHandler())
+    }
+
+    @Autowired
+    private lateinit var session: SessionModule
+    @Autowired
+    private lateinit var info: UserInfoModule
+    private fun tokenFilter(): AidescitTokenFilter {
+        return AidescitTokenFilter(session, info)
+    }
+
+    @Autowired
+    private lateinit var successHandler: AidescitAuthenticationSuccessHandler
+    @Autowired
+    private lateinit var failedHandler: AidescitAuthenticationFailureHandler
+    @Autowired
+    private lateinit var provider: AidescitAuthenticationProvider
+    private fun processingFilter(): AidescitAuthenticationProcessingFilter {
+        return AidescitAuthenticationProcessingFilter(successHandler, failedHandler, provider)
+    }
+
+    private fun signFilter(): SignFilter {
+        return SignFilter()
     }
 }

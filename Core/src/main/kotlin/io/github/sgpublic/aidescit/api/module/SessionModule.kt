@@ -29,14 +29,14 @@ class SessionModule {
      * @throws UserNotFoundException 参数 [password] 传入 null 但该用户并未注册时抛出
      * @throws InvalidPasswordFormatException 参数 [password] 未加盐时抛出
      */
-    fun get(username: String, password: String? = null): UserSession {
+    fun get(username: String, password: String? = null, ts: Long = -1): UserSession {
         val session: UserSession? = userSession.getUserSession(username)
 
         if (session == null) {
             if (password == null) {
                 throw UserNotFoundException()
             }
-            return refreshSession(username, password)
+            return refreshSession(username, password, ts)
         }
         if (session.isEffective() && !session.isExpired()
             && checkSession(session)) {
@@ -50,7 +50,7 @@ class SessionModule {
             }
             return session
         }
-        return refreshSession(username, password ?: session.password)
+        return refreshSession(username, password ?: session.password, ts)
     }
 
     /**
@@ -80,12 +80,19 @@ class SessionModule {
      * @param password 用户加盐密文密码
      * @return 返回 [UserSession]
      */
-    private fun refreshSession(username: String, password: String): UserSession {
+    private fun refreshSession(username: String, password: String, ts: Long = -1): UserSession {
         Log.d("刷新 ASP.NET_SessionId", username)
         val passwordDecrypted = password.let {
             return@let RSAUtil.decode(it)
         }.also {
             if (it.length <= 8){
+                throw InvalidPasswordFormatException()
+            }
+            if (ts < 0) {
+                return@also
+            }
+            val hash = it.substring(0, 8)
+            if (hash != ts.random()) {
                 throw InvalidPasswordFormatException()
             }
         }.substring(8)

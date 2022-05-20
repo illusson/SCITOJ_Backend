@@ -69,7 +69,7 @@ class UserInfoModule {
             if (this == ""){
                 throw ServerRuntimeException("年级获取失败")
             }
-            return@run toShortOrNull() ?: throw ServerRuntimeException("年级ID解析失败")
+            return@run toIntOrNull() ?: throw ServerRuntimeException("年级ID解析失败")
         }
         result.name = doc.select("#xm").text().run {
             if (this == ""){
@@ -90,7 +90,7 @@ class UserInfoModule {
             val match = Pattern.compile("(\\d+)\\.?(\\d+)班").matcher(this)
             if (match.find()){
                 return@run match.group(0)
-                    .replace("班", "").toShortOrNull()
+                    .replace("班", "").toIntOrNull()
                     ?: throw ServerRuntimeException("班级ID解析失败")
             } else {
                 throw ServerRuntimeException("班级ID获取失败")

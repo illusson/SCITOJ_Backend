@@ -11,7 +11,7 @@
  Target Server Version : 100607
  File Encoding         : 65001
 
- Date: 05/05/2022 12:54:02
+ Date: 19/05/2022 18:41:42
 */
 
 SET NAMES utf8mb4;
@@ -68,11 +68,11 @@ CREATE TABLE `faculty_chart`  (
 DROP TABLE IF EXISTS `problem_submission`;
 CREATE TABLE `problem_submission`  (
   `sub_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `u_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `u_id` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `p_id` int(11) UNSIGNED NOT NULL,
   `sub_code` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `sub_code_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`sub_id`, `u_id`, `p_id`) USING BTREE
+  PRIMARY KEY (`sub_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -101,18 +101,20 @@ CREATE TABLE `problem_tags`  (
 DROP TABLE IF EXISTS `problems`;
 CREATE TABLE `problems`  (
   `p_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `p_display_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `p_title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `p_description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `p_description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `p_sample` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `p_hint` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `p_solution` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `p_create_time` datetime NOT NULL,
   `p_create_user` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `p_edit_user` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `p_edit_user` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `p_edit_time` datetime NULL DEFAULT NULL,
   `p_show_guest` tinyint(1) NOT NULL DEFAULT 1,
   `p_show_public` tinyint(1) NOT NULL DEFAULT 0,
   `p_daily` date NULL DEFAULT NULL,
-  PRIMARY KEY (`p_id`, `p_create_user`, `p_edit_user`) USING BTREE
+  PRIMARY KEY (`p_id`) USING BTREE,
+  UNIQUE INDEX `problem`(`p_id`, `p_create_time`, `p_create_user`, `p_edit_user`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -136,7 +138,7 @@ CREATE TABLE `user_info`  (
   `u_nickname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `u_name` tinytext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `u_identify` tinyint(2) NOT NULL DEFAULT 0,
-  `u_level` tinyint(2) NOT NULL DEFAULT 0,
+  `u_role` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 0,
   `u_faculty` smallint(6) NOT NULL DEFAULT 0,
   `u_specialty` smallint(6) NOT NULL DEFAULT 0,
   `u_class` tinyint(4) NOT NULL DEFAULT 0,

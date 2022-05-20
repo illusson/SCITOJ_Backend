@@ -1,0 +1,41 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Deploy Debug" type="DEPLOY_HOST_RUN_CONFIGURATION" factoryName="Deploy to Host">
+    <option name="accountModel" />
+    <option name="accountModels" />
+    <option name="address" />
+    <option name="afterCommand" value="sh ./script/restart.sh --debug" />
+    <option name="alreadyReset" value="true" />
+    <option name="autoOpen" value="false" />
+    <option name="beforeCommand" value="rm -rf /home/scitoj/SCITOJ_Backend/SCITOJ_Backend.jar" />
+    <option name="defaultTabIdx" value="0" />
+    <option name="ecsInstance">
+      <EcsInstance>
+        <option name="OSType" />
+        <option name="instanceId" />
+        <option name="instanceName" />
+        <option name="netType" />
+        <option name="privateIps" />
+        <option name="publicIps" />
+        <option name="regionId" />
+        <option name="tags" />
+      </EcsInstance>
+    </option>
+    <option name="ecsInstances" />
+    <option name="hostIds">
+      <list>
+        <option value="1" />
+      </list>
+    </option>
+    <option name="hostTagId" value="0" />
+    <option name="location" value="/home/scitoj/SCITOJ_Backend" />
+    <option name="pathOrUrl" value="$PROJECT_DIR$/../SCITOJ_Backend\build\libs" />
+    <option name="tagId" value="0" />
+    <option name="terminalCommand" />
+    <option name="type" value="HOST" />
+    <option name="uploadType" value="GRADLE" />
+    <method v="2">
+      <option name="Gradle.BeforeRunTask" enabled="true" tasks="clean" externalProjectPath="$PROJECT_DIR$/Core" vmOptions="" scriptParameters="" />
+      <option name="Gradle.BeforeRunTask" enabled="false" tasks="bootJar" externalProjectPath="$PROJECT_DIR$/Core" vmOptions="" scriptParameters="" />
+    </method>
+  </configuration>
+</component>

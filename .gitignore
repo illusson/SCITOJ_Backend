@@ -42,3 +42,4 @@ Core/bin/
 .DS_Store
 
 /Core/src/test/resources/*.properties
+log

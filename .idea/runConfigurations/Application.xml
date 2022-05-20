@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <option name="ACTIVE_PROFILES" />
+    <module name="SCITOJ_Backend.Core.main" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="io.github.Application" />
+    <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/Core/bin" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
