@@ -26,8 +26,8 @@ class AidescitAuthenticationProvider: AuthenticationProvider {
             authentication as AidescitAuthenticationToken
             val username = authentication.principal
             val password = authentication.credentials
-            val ts = authentication.ts
-            session.get(username, password, ts)
+            val ticket = authentication.ticket
+            session.get(username, password, ticket)
             return AidescitAuthenticationToken(
                 username, password, info.get(username), APIModule.TS_FULL
             )

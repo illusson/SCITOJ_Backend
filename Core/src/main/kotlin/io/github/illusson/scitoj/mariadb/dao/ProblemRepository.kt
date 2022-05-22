@@ -8,31 +8,48 @@ import org.springframework.stereotype.Repository
 @Repository
 interface ProblemRepository: JpaRepository<Problem, Int> {
     @Query(
-        "select top :size * from (" +
-                "  select top (:page * :size) " +
-                "    row_number() over (order by :order) as `RowNum`, " +
-                "    * from `problems` where `p_show_public` = true and `p_show_guest` = :guest" +
-                ") as tempTable " +
-                "where `RowNum` between (:page - 1) * :size + 1 and :page * :size",
+        "select * from `problems` " +
+                "where `p_show_public` = true and `p_show_guest` = :guest " +
+                "order by :order limit :start, :offset",
         nativeQuery = true
     )
     fun listForPublic(
-        page: Int, size: Int = 20,
+        start: Int, offset: Int = 20,
         guest: Boolean = false,
         order: String = "desc"
-    ): ArrayList<Problem>
+    ): List<Problem>
 
     @Query(
-        "select top :size * from (" +
-                "  select top (:page * :size) " +
-                "    row_number() over (order by :order) as `RowNum`, " +
-                "    * from `problems`" +
-                ") as tempTable " +
-                "where `RowNum` between (:page - 1) * :size + 1 and :page * :size",
+        "select * from `problems` order by :order limit :start, :offset",
         nativeQuery = true
     )
     fun listForAdmin(
-        page: Int, size: Int = 20,
+        start: Int, offset: Int = 20,
         order: String = "desc"
-    ): ArrayList<Problem>
+    ): List<Problem>
+
+    @Query(
+        "select * from `problems` " +
+                "where `p_id` in :pidList and `p_show_public` = true and `p_show_guest` = :guest " +
+                "order by :order limit :start, :offset",
+        nativeQuery = true
+    )
+    fun listPublicProblemIn(
+        pidList: List<Int>,
+        start: Int, offset: Int = 20,
+        guest: Boolean = false,
+        order: String = "desc"
+    ): List<Problem>
+
+    @Query(
+        "select * from `problems` " +
+                "where `p_id` in :pidList " +
+                "order by :order limit :start, :offset",
+        nativeQuery = true
+    )
+    fun listAdminProblemIn(
+        pidList: List<Int>,
+        start: Int, offset: Int = 20,
+        order: String = "desc"
+    ): List<Problem>
 }

@@ -7,7 +7,7 @@ import org.springframework.security.core.GrantedAuthority
 
 class AidescitAuthenticationToken(
     private val username: String, private val password: String,
-    val authentication: UserInfo? = null, val ts: Long = APIModule.TS_FULL
+    val authentication: UserInfo? = null, val ticket: Long = APIModule.TS_FULL
 ) : AbstractAuthenticationToken(
     arrayListOf<GrantedAuthority>().also { array ->
         authentication?.let { array.add(it) }

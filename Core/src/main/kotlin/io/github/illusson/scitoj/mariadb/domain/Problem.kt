@@ -1,75 +1,52 @@
 package io.github.illusson.scitoj.mariadb.domain
 
-import io.github.sgpublic.aidescit.api.core.util.fromGson
-import io.github.sgpublic.aidescit.api.core.util.toGson
+import io.swagger.v3.oas.annotations.media.Schema
 import java.io.Serializable
 import java.util.*
 import javax.persistence.*
 
 @Entity
 @Table(name = "problems")
-class Problem: Serializable {
+class Problem: SampleProblem() {
     @Id
     @Column(name = "p_id")
-    val id: Int = 0
-
-    @Column(name = "p_display_id")
-    var displayId: String? = null
+    override val id: Int = 0
 
     @Column(name = "p_title")
-    var title: String = ""
+    override var title: String = ""
 
-    @Column(name = "p_description")
-    var description: String? = null
-
-    @Column(name = "p_sample")
-    @Convert(converter = SampleConverter::class)
-    var sample: ArrayList<Sample> = ArrayList()
-
-    @Column(name = "p_hint")
-    var hint: String = ""
-
-//    @Transient
-//    @Column(name = "p_solution")
-//    var solution: String = ""
-
+    @Schema(name = "create_time")
     @Column(name = "p_create_time")
     var createTime: Date = Date()
 
+    @Schema(name = "create_user")
     @Column(name = "p_create_user")
     var createUser: String = ""
 
+    @Schema(name = "edit_user")
     @Column(name = "p_edit_user")
     var editUser: String? = null
 
+    @Schema(name = "edit_time")
     @Column(name = "p_edit_time")
     var editTime: Date? = null
 
+    @Transient
+    @Schema(name = "show_guest", hidden = true)
     @Column(name = "p_show_guest")
     var showGuest: Boolean = false
 
+    @Transient
+    @Schema(name = "show_public", hidden = true)
     @Column(name = "p_show_public")
     var showPublic: Boolean = false
 
     @Column(name = "p_daily")
-    var daily: Date? = null
+    override var daily: Date? = null
+}
 
-    data class Sample(
-        val input: String,
-        val output: String,
-        val desc: String? = null
-    )
-    class SampleList: ArrayList<Sample>()
-    @Converter
-    class SampleConverter: AttributeConverter<ArrayList<Sample>, String> {
-        override fun convertToDatabaseColumn(attribute: ArrayList<Sample>): String {
-            return attribute.toGson()
-        }
-
-        override fun convertToEntityAttribute(dbData: String?): ArrayList<Sample> {
-            return SampleList::class.fromGson(
-                dbData ?: return arrayListOf()
-            )
-        }
-    }
+open class SampleProblem: Serializable {
+    open val id: Int = 0
+    open var title: String = ""
+    open var daily: Date? = null
 }

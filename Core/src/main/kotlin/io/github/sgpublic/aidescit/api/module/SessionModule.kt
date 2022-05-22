@@ -25,18 +25,19 @@ class SessionModule {
      * 获取用户 session
      * @param username 用户学号/工号
      * @param password 用户加盐密文密码，若传入 null 则从数据库调取已有数据
+     * @param ticket 用户登录票据
      * @return 返回 [UserSession]
      * @throws UserNotFoundException 参数 [password] 传入 null 但该用户并未注册时抛出
      * @throws InvalidPasswordFormatException 参数 [password] 未加盐时抛出
      */
-    fun get(username: String, password: String? = null, ts: Long = -1): UserSession {
+    fun get(username: String, password: String? = null, ticket: Long = -1): UserSession {
         val session: UserSession? = userSession.getUserSession(username)
 
         if (session == null) {
             if (password == null) {
                 throw UserNotFoundException()
             }
-            return refreshSession(username, password, ts)
+            return refreshSession(username, password, ticket)
         }
         if (session.isEffective() && !session.isExpired()
             && checkSession(session)) {
@@ -50,12 +51,11 @@ class SessionModule {
             }
             return session
         }
-        return refreshSession(username, password ?: session.password, ts)
+        return refreshSession(username, password ?: session.password, ticket)
     }
 
     /**
      * 检查 ASP.NET_SessionId 和 route 是否有效
-     * @param username 用户学号/工号
      * @param session UserSession
      */
     private fun checkSession(session: UserSession): Boolean {
@@ -356,11 +356,13 @@ class SessionModule {
         }
         val lt = input.attr("value")
         val pwd: String = password ?: userSession.getUserPassword(username)?.run {
-            return@run RSAUtil.decode(this).apply {
-                if (length <= 8){
-                    throw InvalidPasswordFormatException()
-                }
-            }.substring(8)
+            return@run RSAUtil.decode(this)
+//                .apply {
+//                    if (length <= 8){
+//                        throw InvalidPasswordFormatException()
+//                    }
+//                }
+                .substring(8)
         } ?: throw UserNotFoundException()
         val resp2 = APIModule.executeResponse(
             url = "http://218.6.163.95:18080/zfca/login;jsessionid=$jsId1",
@@ -388,9 +390,9 @@ class SessionModule {
                     throw ServerRuntimeException.INTERNAL_ERROR
                 }
             }
-            if (length <= 19){
-                throw ServerRuntimeException("CASTGC 解析失败")
-            }
+//            if (length <= 19){
+//                throw ServerRuntimeException("CASTGC 解析失败")
+//            }
             return@run substring(7, length - 12)
         }
         val location1 = headers1["Location"] ?: throw ServerRuntimeException("第一次跳转失败")
@@ -403,9 +405,9 @@ class SessionModule {
             if (this == null){
                 throw ServerRuntimeException("JSESSIONID2 获取失败")
             }
-            if (length <= 19){
-                throw ServerRuntimeException("JSESSIONID2 处理失败")
-            }
+//            if (length <= 19){
+//                throw ServerRuntimeException("JSESSIONID2 处理失败")
+//            }
             return@run substring(11, length - 8)
         }
         val location2 = headers2["Location"] ?: throw ServerRuntimeException("第二次跳转失败")

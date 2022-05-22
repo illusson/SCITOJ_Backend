@@ -1,8 +1,8 @@
 package io.github
 
 import io.github.sgpublic.aidescit.api.core.spring.config.CurrentConfig
-import io.github.sgpublic.aidescit.api.core.spring.config.SecurityConfig
 import io.github.sgpublic.aidescit.api.core.spring.config.OpenDocConfig
+import io.github.sgpublic.aidescit.api.core.spring.config.SecurityConfig
 import io.github.sgpublic.aidescit.api.core.util.ArgumentReader
 import io.github.sgpublic.aidescit.api.core.util.Log
 import io.github.sgpublic.aidescit.api.exceptions.ServerRuntimeException

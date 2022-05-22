@@ -14,9 +14,16 @@ import org.springframework.web.bind.annotation.RequestMethod
 @RequestBody(content = [Content(encoding = [Encoding(
     contentType = MediaType.APPLICATION_JSON_VALUE
 )])])
-@ApiResponse(content = [Content(encoding = [Encoding(
-    contentType = MediaType.APPLICATION_JSON_VALUE
-)])])
+@ApiResponse(
+    responseCode = "200",
+    content = [
+        Content(
+            encoding = [
+                Encoding(contentType = MediaType.APPLICATION_JSON_VALUE)
+            ]
+        )
+    ]
+)
 annotation class ApiPostMapping(
     @get:AliasFor(attribute = "name", annotation = RequestMapping::class) val path: String
 )

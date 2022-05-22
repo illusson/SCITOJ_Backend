@@ -31,7 +31,7 @@ class AidescitAuthenticationProcessingFilter(
     private val loginRequest = object {
         var username: String = ""
         var password: String = ""
-        var ts: Long = -1
+        var ticket: Long = -1
     }::class
     override fun attemptAuthentication(request: HttpServletRequest,
                                        response: HttpServletResponse): Authentication {
@@ -48,7 +48,7 @@ class AidescitAuthenticationProcessingFilter(
         if (req.username == "" || req.password == "") {
             throw BadCredentialsException("Empty username or password.")
         }
-        val auth = AidescitAuthenticationToken(req.username, req.password, ts = req.ts)
+        val auth = AidescitAuthenticationToken(req.username, req.password, ticket = req.ticket)
         return authenticationManager.authenticate(auth)
     }
 }

@@ -11,7 +11,7 @@
  Target Server Version : 100607
  File Encoding         : 65001
 
- Date: 19/05/2022 18:41:42
+ Date: 22/05/2022 11:47:59
 */
 
 SET NAMES utf8mb4;
@@ -48,6 +48,9 @@ DROP TABLE IF EXISTS `contests`;
 CREATE TABLE `contests`  (
   `con_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `con_title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `con_desc` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `con_start_time` datetime NULL DEFAULT NULL,
+  `con_duration` time NULL DEFAULT NULL,
   PRIMARY KEY (`con_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
@@ -63,10 +66,22 @@ CREATE TABLE `faculty_chart`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
--- Table structure for problem_submission
+-- Table structure for problem_detail
 -- ----------------------------
-DROP TABLE IF EXISTS `problem_submission`;
-CREATE TABLE `problem_submission`  (
+DROP TABLE IF EXISTS `problem_detail`;
+CREATE TABLE `problem_detail`  (
+  `p_id` int(10) UNSIGNED NOT NULL,
+  `p_description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `p_sample` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `p_hint` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`p_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for problem_submition
+-- ----------------------------
+DROP TABLE IF EXISTS `problem_submition`;
+CREATE TABLE `problem_submition`  (
   `sub_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `u_id` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `p_id` int(11) UNSIGNED NOT NULL,
@@ -90,9 +105,23 @@ CREATE TABLE `problem_tag_chart`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `problem_tags`;
 CREATE TABLE `problem_tags`  (
-  `p_id` int(11) NOT NULL,
-  `t_id` int(11) NOT NULL,
-  PRIMARY KEY (`p_id`, `t_id`) USING BTREE
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `p_id` int(10) UNSIGNED NOT NULL,
+  `t_id` int(10) UNSIGNED NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `p_id`(`p_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for problem_test_case
+-- ----------------------------
+DROP TABLE IF EXISTS `problem_test_case`;
+CREATE TABLE `problem_test_case`  (
+  `p_id` int(10) UNSIGNED NOT NULL,
+  `p_case_id` int(11) NOT NULL,
+  `p_input` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `p_output` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  PRIMARY KEY (`p_id`, `p_case_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -101,11 +130,11 @@ CREATE TABLE `problem_tags`  (
 DROP TABLE IF EXISTS `problems`;
 CREATE TABLE `problems`  (
   `p_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `p_display_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `p_title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `p_description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `p_sample` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `p_hint` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `p_from` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `p_create_time` datetime NOT NULL,
   `p_create_user` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `p_edit_user` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,

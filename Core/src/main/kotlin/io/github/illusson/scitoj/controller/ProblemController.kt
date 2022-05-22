@@ -1,27 +1,22 @@
 package io.github.illusson.scitoj.controller
 
-import io.github.illusson.scitoj.dto.request.CreateProblemDto
-import io.github.illusson.scitoj.dto.request.EditProblemDto
-import io.github.illusson.scitoj.dto.request.ListProblemDto
-import io.github.illusson.scitoj.dto.request.SubmitSolutionDto
+import io.github.illusson.scitoj.dto.request.*
 import io.github.illusson.scitoj.dto.response.ProblemCreateDto
 import io.github.illusson.scitoj.dto.response.ProblemDetailDto
 import io.github.illusson.scitoj.dto.response.ProblemListDto
-import io.github.illusson.scitoj.mariadb.dao.ProblemRepository
 import io.github.illusson.scitoj.mariadb.domain.Problem
-import io.github.sgpublic.aidescit.api.core.base.BaseController
+import io.github.illusson.scitoj.mariadb.domain.SampleProblem
+import io.github.illusson.scitoj.module.ProblemModule
 import io.github.sgpublic.aidescit.api.core.spring.annotation.ApiGetMapping
 import io.github.sgpublic.aidescit.api.core.spring.annotation.ApiPostMapping
 import io.github.sgpublic.aidescit.api.core.spring.security.AidescitAuthority
 import io.github.sgpublic.aidescit.api.dto.BaseResponseDto
-import io.github.sgpublic.aidescit.api.exceptions.ProblemNotFoundException
+import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.springdoc.api.annotations.ParameterObject
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.data.repository.findByIdOrNull
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.RestController
-import java.util.*
 
 /**
  * @author sgpublic
@@ -29,73 +24,79 @@ import java.util.*
  */
 @Tag(name = "题目类", description = "题目操作")
 @RestController
-class ProblemController: BaseController() {
+class ProblemController {
     @Autowired
-    private lateinit var problem: ProblemRepository
+    private lateinit var problem: ProblemModule
 
+    @Operation(summary = "用户题库", description = "主页展示的题库列表。")
     @ApiGetMapping("/api/problem/list")
-    fun listProblem(@ParameterObject page: ListProblemDto): ProblemListDto {
-        val list = if (IS_AUTHENTICATED && CURRENT_USER.IS_ADMIN) {
-            problem.listForAdmin(
-                page.pageIndex, page.pageSize, page.order
-            )
-        } else {
-            problem.listForPublic(
-                page.pageIndex, page.pageSize, IS_AUTHENTICATED, page.order
-            )
-        }
+    fun listProblem(@ParameterObject page: ListPageDto): ProblemListDto<SampleProblem> {
+        val list = problem.listProblem(page)
         return ProblemListDto(list)
     }
 
-    @ApiGetMapping("/api/problem/detail")
-    fun getProblemDetail(pId: Int): ProblemDetailDto {
-        val p = getProblemById(pId)
-        return ProblemDetailDto(p)
+    @Operation(summary = "用户题库", description = "主页展示的题库列表，按标签筛选。")
+    @ApiPostMapping("/api/problem/list")
+    fun listProblemByTag(page: TagProblemDto): ProblemListDto<SampleProblem> {
+        val list = problem.listProblem(page, page.tid)
+        return ProblemListDto(list)
     }
 
+    @Operation(summary = "用户题目详情", description = "向普通用户展示的题目详情。")
+    @ApiGetMapping("/api/problem/detail")
+    fun getProblemDetail(id: Int): ProblemDetailDto<SampleProblem> {
+        val (info, detail, tag) = problem.getProblemDetail(id)
+        return ProblemDetailDto(info, detail, tag)
+    }
+
+    @Operation(summary = "用户代码提交", description = "提交代码，请提交 UTF-8 编码、由 base64 加密后的文本")
     @PreAuthorize(AidescitAuthority.AUTHORIZE_UP_USER)
     @ApiPostMapping("/api/problem/submit")
     fun submitSolution(submit: SubmitSolutionDto): BaseResponseDto {
-        TODO("not implement yet")
-    }
-
-    @PreAuthorize(AidescitAuthority.AUTHORIZE_UP_ADMIN)
-    @ApiPostMapping("/api/problem/create")
-    fun createProblem(create: CreateProblemDto): ProblemCreateDto {
-        Problem().also {
-            it.createUser = CURRENT_USER.username
-            it.title = create.title
-            it.displayId = create.displayId
-        }.let {
-            return ProblemCreateDto(problem.save(it).id)
-        }
-    }
-
-    @PreAuthorize(AidescitAuthority.AUTHORIZE_UP_ADMIN)
-    @ApiPostMapping("/api/problem/edit")
-    fun editProblem(edit: EditProblemDto): BaseResponseDto {
-        val p = getProblemById(edit.pId)
-        edit.displayId?.let { p.displayId = it }
-        edit.title?.let { p.title = it }
-        p.description = edit.description
-        edit.sample?.let { p.sample = it }
-        edit.showGuest?.let { p.showGuest = it }
-        edit.showPublic?.let { p.showPublic = it }
-        p.editUser = CURRENT_USER.username
-        p.editTime = Date()
-        problem.save(p)
+        problem.submitSolution(submit.pid, submit.codeContent, submit.codeType)
         return BaseResponseDto()
     }
 
-    private fun getProblemById(id: Int): Problem {
-        return problem.findByIdOrNull(id)?.takeIf {
-            if (!IS_AUTHENTICATED) {
-                return@takeIf it.showPublic && it.showGuest
-            }
-            if (CURRENT_USER.IS_ADMIN) {
-                return@takeIf true
-            }
-            return@takeIf it.showPublic
-        } ?: throw ProblemNotFoundException()
+    @Operation(summary = "管理员题目管理", description = "管理页展示的题库列表，包含额外信息。")
+    @PreAuthorize(AidescitAuthority.AUTHORIZE_UP_ADMIN)
+    @ApiGetMapping("/admin/problem/list")
+    fun listProblemForAdmin(@ParameterObject page: ListPageDto): ProblemListDto<Problem> {
+        val list = problem.listProblemForAdmin(page)
+        return ProblemListDto(list)
+    }
+
+    @Operation(summary = "管理员题目管理", description = "管理页展示的题库列表，包含额外信息，按标签筛选。")
+    @PreAuthorize(AidescitAuthority.AUTHORIZE_UP_ADMIN)
+    @ApiPostMapping("/admin/problem/list")
+    fun listProblemForAdmin(page: TagProblemDto): ProblemListDto<Problem> {
+        val list = problem.listProblemForAdmin(page)
+        return ProblemListDto(list)
+    }
+
+    @Operation(summary = "管理员题目创建", description = "管理页创建题目，通过标题创建题目，返回题目 ID 用于进一步编辑。")
+    @PreAuthorize(AidescitAuthority.AUTHORIZE_UP_ADMIN)
+    @ApiPostMapping("/admin/problem/create")
+    fun createProblem(create: CreateProblemDto): ProblemCreateDto {
+        val pid = problem.createProblem(create.title)
+        return ProblemCreateDto(pid)
+    }
+
+    @Operation(summary = "管理员题目编辑", description = "管理页编辑题目，若设置题目向游客公开，则默认同时向登录用户公开。")
+    @PreAuthorize(AidescitAuthority.AUTHORIZE_UP_ADMIN)
+    @ApiPostMapping("/admin/problem/edit")
+    fun editProblem(edit: EditProblemDto): BaseResponseDto {
+        problem.editProblem(
+            edit.pid, edit.description, edit.sample,
+            edit.hint, edit.showGuest, edit.showPublic,
+            edit.title, edit.tag
+        )
+        return BaseResponseDto()
+    }
+
+    @Operation(summary = "管理页题目详情", description = "管理页题目详情，包含额外信息。")
+    @ApiGetMapping("/admin/problem/detail")
+    fun getProblemDetailForAdmin(id: Int): ProblemDetailDto<Problem> {
+        val (info, tag) = problem.getProblemDetail(id)
+        return ProblemDetailDto(info, tag)
     }
 }

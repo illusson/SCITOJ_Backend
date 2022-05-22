@@ -9,6 +9,6 @@ data class PublicKeyDto(
     val key: String,
     @Schema(description = "密码加盐")
     val hash: String,
-    @Schema(description = "响应时间戳")
-    val ts: Long
+    @Schema(description = "登录票据")
+    val ticket: Long
 ): BaseResponseDto()
