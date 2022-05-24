@@ -8,8 +8,7 @@ import com.fasterxml.jackson.annotation.JsonInclude
  * @param message 错误说明
  */
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
-class FailedResult(code: Int, message: String)
-    : BaseResponseDto(code, message) {
+class FailedResult(code: Int, message: String): BaseResponseDto(code, message) {
     companion object {
         @JvmStatic
         val INVALID_SIGN = FailedResult(-400, "服务签名错误")
@@ -38,5 +37,7 @@ class FailedResult(code: Int, message: String)
 
         @JvmStatic
         val PROBLEM_NOTFOUND = FailedResult(-1001, "您请求的题目不存在")
+        @JvmStatic
+        val ITEM_EDIT_ERROR = FailedResult(-1002, "对象信息编辑出错")
     }
 }

@@ -17,7 +17,3 @@ data class ProblemDetailDto<T: SampleProblem>(
     val detail: ProblemDetail? = null,
     val tags: List<TagChart> = listOf()
 ): BaseResponseDto()
-
-data class ProblemCreateDto(
-    val id: Int
-): BaseResponseDto()

@@ -13,74 +13,48 @@ import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestControllerAdvice
 import org.springframework.web.servlet.NoHandlerFoundException
 import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletResponse
 
 /** 全局异常拦截器 */
 @RestControllerAdvice
-class GlobalExceptionHandler {
-    /**
-     * 拦截404，生产环境下跳转主页
-     */
+class AidescitExceptionHandler {
+    /** 拦截 404 */
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NoHandlerFoundException::class)
-    fun handleNoHandlerFoundException(exception: Exception, response: HttpServletResponse){
-//        if (Application.DEBUG){
-            response.status = HttpStatus.NOT_FOUND.value()
-//            return
-//        }
-//        response.status = HttpStatus.FOUND.value()
-//        response.setHeader("Location", "https://aidescit.sgpublic.xyz/")
-    }
+    fun handleNoHandlerFoundException() { }
 
-    /**
-     * 服务 Sign 错误拦截
-     */
+    /** 服务 Sign 错误拦截 */
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(InvalidSignException::class)
     fun handleInvalidSignException(): FailedResult {
         return FailedResult.INVALID_SIGN
     }
 
-    /**
-     * 服务请求过期拦截
-     */
+    /** 服务请求过期拦截 */
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(ServiceExpiredException::class)
     fun handleServiceExpiredException(): FailedResult {
         return FailedResult.SERVICE_EXPIRED
     }
 
-    /**
-     * 用户密码错误拦截
-     */
+    /** 用户密码错误拦截 */
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(WrongPasswordException::class)
     fun handleWrongPasswordException(): FailedResult {
         return FailedResult.WRONG_ACCOUNT
     }
 
-    /**
-     * 无效的 token 拦截
-     */
+    /** 无效的 token 拦截 */
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(TokenExpiredException::class)
     fun handleTokenExpiredException(): FailedResult {
         return FailedResult.EXPIRED_TOKEN
     }
 
-    /**
-     * 容错处理，参数解析失败错误拦截
-     */
+    /** 容错处理，参数解析失败错误拦截 */
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(HttpMessageNotReadableException::class)
     fun handleHttpMessageNotReadableException(): FailedResult {
         return FailedResult.INTERNAL_SERVER_ERROR
-    }
-
-    /** 容错处理，请求题目不存在错误拦截 */
-    @ResponseStatus(HttpStatus.OK)
-    @ExceptionHandler(ProblemNotFoundException::class)
-    fun handleProblemNotFoundException(): FailedResult {
-        return FailedResult.PROBLEM_NOTFOUND
     }
 
     /** 容错处理，参数验证异常错误拦截 */

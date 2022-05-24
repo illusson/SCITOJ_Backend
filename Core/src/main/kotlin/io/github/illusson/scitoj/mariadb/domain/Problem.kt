@@ -7,7 +7,7 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "problems")
-class Problem: SampleProblem() {
+class Problem: SampleProblem(), SimpleItem {
     @Id
     @Column(name = "p_id")
     override val id: Int = 0
@@ -17,29 +17,29 @@ class Problem: SampleProblem() {
 
     @Schema(name = "create_time")
     @Column(name = "p_create_time")
-    var createTime: Date = Date()
+    override var createTime: Date = Date()
 
     @Schema(name = "create_user")
     @Column(name = "p_create_user")
-    var createUser: String = ""
+    override var createUser: String = ""
 
     @Schema(name = "edit_user")
     @Column(name = "p_edit_user")
-    var editUser: String? = null
+    override var editUser: String? = null
 
     @Schema(name = "edit_time")
     @Column(name = "p_edit_time")
-    var editTime: Date? = null
+    override var editTime: Date? = null
 
     @Transient
     @Schema(name = "show_guest", hidden = true)
     @Column(name = "p_show_guest")
-    var showGuest: Boolean = false
+    override var showGuest: Boolean = false
 
     @Transient
     @Schema(name = "show_public", hidden = true)
     @Column(name = "p_show_public")
-    var showPublic: Boolean = false
+    override var showPublic: Boolean = false
 
     @Column(name = "p_daily")
     override var daily: Date? = null

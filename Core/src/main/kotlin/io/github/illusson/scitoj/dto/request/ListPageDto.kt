@@ -1,6 +1,6 @@
 package io.github.illusson.scitoj.dto.request
 
-import io.github.sgpublic.aidescit.api.dto.BaseRequestDto
+import io.github.sgpublic.aidescit.api.dto.SignedRequestDto
 import io.swagger.v3.oas.annotations.media.Schema
 import org.springframework.web.bind.annotation.RequestParam
 import javax.persistence.Transient
@@ -17,7 +17,7 @@ open class ListPageDto(
         allowableValues = ["desc", "asc"])
     @RequestParam(name = "order", required = false, defaultValue = "desc")
     val order: String = "desc"
-): BaseRequestDto() {
+): SignedRequestDto() {
 
     @get:Transient
     val start: Int get() = page * size

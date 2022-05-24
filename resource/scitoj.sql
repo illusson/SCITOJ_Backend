@@ -11,7 +11,7 @@
  Target Server Version : 100607
  File Encoding         : 65001
 
- Date: 22/05/2022 11:47:59
+ Date: 24/05/2022 19:05:28
 */
 
 SET NAMES utf8mb4;
@@ -36,9 +36,10 @@ CREATE TABLE `class_chart`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `contest_problem`;
 CREATE TABLE `contest_problem`  (
+  `id` int(11) NOT NULL,
   `con_id` int(11) NOT NULL,
   `p_id` int(11) NOT NULL,
-  PRIMARY KEY (`con_id`, `p_id`) USING BTREE
+  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -48,9 +49,15 @@ DROP TABLE IF EXISTS `contests`;
 CREATE TABLE `contests`  (
   `con_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `con_title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `con_desc` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `con_description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `con_start_time` datetime NULL DEFAULT NULL,
   `con_duration` time NULL DEFAULT NULL,
+  `con_create_time` datetime NOT NULL,
+  `con_create_user` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `con_edit_user` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `con_edit_time` datetime NULL DEFAULT NULL,
+  `con_show_guest` tinyint(1) NOT NULL DEFAULT 1,
+  `con_show_public` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`con_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
@@ -74,6 +81,7 @@ CREATE TABLE `problem_detail`  (
   `p_description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `p_sample` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `p_hint` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `p_difficulty` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`p_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
@@ -131,9 +139,6 @@ DROP TABLE IF EXISTS `problems`;
 CREATE TABLE `problems`  (
   `p_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `p_title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `p_description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `p_sample` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `p_hint` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `p_from` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `p_create_time` datetime NOT NULL,
   `p_create_user` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,

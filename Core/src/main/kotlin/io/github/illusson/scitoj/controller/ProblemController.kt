@@ -1,7 +1,7 @@
 package io.github.illusson.scitoj.controller
 
 import io.github.illusson.scitoj.dto.request.*
-import io.github.illusson.scitoj.dto.response.ProblemCreateDto
+import io.github.illusson.scitoj.dto.response.IdDto
 import io.github.illusson.scitoj.dto.response.ProblemDetailDto
 import io.github.illusson.scitoj.dto.response.ProblemListDto
 import io.github.illusson.scitoj.mariadb.domain.Problem
@@ -76,9 +76,9 @@ class ProblemController {
     @Operation(summary = "管理员题目创建", description = "管理页创建题目，通过标题创建题目，返回题目 ID 用于进一步编辑。")
     @PreAuthorize(AidescitAuthority.AUTHORIZE_UP_ADMIN)
     @ApiPostMapping("/admin/problem/create")
-    fun createProblem(create: CreateProblemDto): ProblemCreateDto {
+    fun createProblem(create: CreateProblemDto): IdDto {
         val pid = problem.createProblem(create.title)
-        return ProblemCreateDto(pid)
+        return IdDto(pid)
     }
 
     @Operation(summary = "管理员题目编辑", description = "管理页编辑题目，若设置题目向游客公开，则默认同时向登录用户公开。")

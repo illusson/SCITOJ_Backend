@@ -1,14 +1,14 @@
 package io.github.illusson.scitoj.dto.request
 
 import io.github.illusson.scitoj.mariadb.domain.ProblemDetail
-import io.github.sgpublic.aidescit.api.dto.BaseRequestDto
+import io.github.sgpublic.aidescit.api.dto.SignedRequestDto
 import io.swagger.v3.oas.annotations.media.Schema
 import org.springframework.web.bind.annotation.RequestParam
 
 data class CreateProblemDto(
     @Schema(description = "题目标题", required = true)
     var title: String
-): BaseRequestDto()
+): SignedRequestDto()
 
 data class EditProblemDto(
     @Schema(name = "id", required = true)
@@ -19,8 +19,12 @@ data class EditProblemDto(
     @RequestParam(name = "desc")
     var description: String,
 
+    @Schema(required = true)
+    @RequestParam(name = "difficulty")
+    var difficulty: Int,
+
     @RequestParam(name = "sample", required = false)
-    var sample: ArrayList<ProblemDetail.Sample>? = null,
+    var sample: List<ProblemDetail.Sample>? = null,
 
     @RequestParam(name = "hint", required = false)
     var hint: String? = null,
@@ -39,7 +43,7 @@ data class EditProblemDto(
     @Schema(name = "tag")
     @RequestParam(name = "tag", required = false)
     var tag: List<String> = listOf()
-): BaseRequestDto()
+): SignedRequestDto()
 
 data class SubmitSolutionDto(
     @Schema(name = "p_id")
@@ -53,4 +57,4 @@ data class SubmitSolutionDto(
     @Schema(name = "code_type")
     @RequestParam(name = "code_type")
     var codeType: String
-): BaseRequestDto()
+): SignedRequestDto()

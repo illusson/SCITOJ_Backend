@@ -1,5 +1,6 @@
 package io.github.illusson.scitoj.module
 
+import io.github.illusson.scitoj.core.util.findByIdAuthed
 import io.github.illusson.scitoj.dto.request.ListPageDto
 import io.github.illusson.scitoj.mariadb.dao.ProblemDetailRepository
 import io.github.illusson.scitoj.mariadb.dao.ProblemRepository
@@ -7,7 +8,6 @@ import io.github.illusson.scitoj.mariadb.dao.ProblemTagRepository
 import io.github.illusson.scitoj.mariadb.dao.TagChartRepository
 import io.github.illusson.scitoj.mariadb.domain.*
 import io.github.sgpublic.aidescit.api.core.base.CurrentUser
-import io.github.sgpublic.aidescit.api.exceptions.ProblemNotFoundException
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Component
@@ -34,7 +34,7 @@ class ProblemModule {
 
     fun getProblemDetail(id: Int): Triple<Problem, ProblemDetail?, List<TagChart>> {
         return Triple(
-            getProblemById(id),
+            problem.findByIdAuthed(id),
             detail.findByIdOrNull(id),
             tagChart.getTagIn(tags.getTagsByProblem(id))
         )
@@ -63,27 +63,20 @@ class ProblemModule {
 
     fun editProblem(
         pid: Int, description: String,
-        sample: ArrayList<ProblemDetail.Sample>? = null,
+        sample: List<ProblemDetail.Sample>? = null,
         hint: String? = null,
         showGuest: Boolean? = null, showPublic: Boolean? = null,
         title: String? = null, tagList: List<String> = listOf()
     ): Boolean {
-        val p = getProblemById(pid)
-        title?.let { p.title = it }
-        showPublic?.let { p.showPublic = it }
-        showGuest?.let {
-            p.showGuest = it
-            if (it) p.showPublic = true
-        }
-        p.editUser = CurrentUser.USERNAME
-        p.editTime = Date()
+        val p = problem.findByIdAuthed(pid)
+        val d = ProblemDetail()
 
-        val d = ProblemDetail().also { detail ->
-            detail.id = pid
-            detail.description = description
-            sample?.let { detail.sample = it }
-            hint?.let { detail.hint = it }
-        }
+        title?.let { p.title = it }
+
+        d.id = pid
+        d.description = description
+        sample?.let { d.sample = it }
+        hint?.let { d.hint = it }
 
         val list = LinkedList<ProblemTags>()
         for (tag: String in tagList) {
@@ -100,21 +93,14 @@ class ProblemModule {
             })
         }
 
+        p.showGuest = showGuest == true
+        p.showPublic = p.showGuest || showPublic == true
+        p.editUser = CurrentUser.USERNAME
+        p.editTime = Date()
+
         detail.save(d)
         tags.saveAll(list)
         problem.save(p)
         return true
-    }
-
-    private fun getProblemById(id: Int): Problem {
-        return problem.findByIdOrNull(id)?.takeIf {
-            if (!CurrentUser.IS_AUTHENTICATED) {
-                return@takeIf it.showPublic && it.showGuest
-            }
-            if (CurrentUser.USER_INFO.IS_ADMIN) {
-                return@takeIf true
-            }
-            return@takeIf it.showPublic
-        } ?: throw ProblemNotFoundException()
     }
 }
