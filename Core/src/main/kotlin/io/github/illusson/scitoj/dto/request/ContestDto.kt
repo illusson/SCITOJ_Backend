@@ -1,6 +1,6 @@
 package io.github.illusson.scitoj.dto.request
 
-import io.github.sgpublic.aidescit.api.dto.SignedRequestDto
+import io.github.sgpublic.aidescit.api.dto.SignedRequest
 import io.swagger.v3.oas.annotations.media.Schema
 import org.springframework.core.convert.converter.Converter
 import org.springframework.web.bind.annotation.RequestParam
@@ -8,42 +8,51 @@ import java.time.Duration
 import java.util.*
 import javax.persistence.Convert
 
-data class CreateContestDto(
-    val title: String
-): SignedRequestDto()
+data class CreateContest(
+    @Schema(description = "竞赛 ID", required = true)
+    val id: String,
+    @Schema(description = "竞赛标题", required = true)
+    val title: String,
 
-data class EditContestDto(
+    override val ts: Long,
+    override val sign: String
+): SignedRequest
+
+data class EditContest(
     @Schema(name = "id", required = true)
     @RequestParam(name = "id")
-    var cid: Int,
+    val cid: String,
 
     @Schema(name = "desc", required = true)
     @RequestParam(name = "desc")
-    var description: String,
+    val description: String,
 
-    @Schema(name = "start_time", required = true)
+    @Schema(name = "start_time", required = true, implementation = Long::class)
     @RequestParam(name = "start_time")
-    var startTime: Date,
+    val startTime: Date,
 
-    @Schema(name = "duration", required = true)
+    @Schema(name = "duration", required = true, implementation = Long::class)
     @RequestParam(name = "duration")
     @Convert(converter = Duration2LongConverter::class)
-    var duration: Duration,
+    val duration: Duration,
 
     @Schema(name = "show_guest")
     @RequestParam(name = "show_guest", required = false)
-    var showGuest: Boolean? = null,
+    val showGuest: Boolean? = null,
 
     @Schema(name = "show_public")
     @RequestParam(name = "show_public", required = false)
-    var showPublic: Boolean? = null,
+    val showPublic: Boolean? = null,
 
     @RequestParam(required = false)
-    var title: String? = null,
+    val title: String? = null,
 
     @RequestParam(required = false)
-    var problem: List<Int>? = null
-): SignedRequestDto() {
+    val problem: List<Int>? = null,
+
+    override val ts: Long,
+    override val sign: String
+): SignedRequest {
     class Duration2LongConverter: Converter<Long, Duration> {
         override fun convert(source: Long): Duration {
             return Duration.ofMinutes(source)

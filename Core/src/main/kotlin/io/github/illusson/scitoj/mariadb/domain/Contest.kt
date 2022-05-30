@@ -1,17 +1,20 @@
 package io.github.illusson.scitoj.mariadb.domain
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import io.swagger.v3.oas.annotations.media.Schema
-import java.io.Serializable
 import java.time.Duration
 import java.util.*
 import javax.persistence.*
 
 @Entity
 @Table(name = "contests")
-class Contest: SampleContest(), SimpleItem {
-    @Id
+class Contest: SampleContest, SimpleItem {
     @Column(name = "con_id")
     override val id: Int = 0
+
+    @Id
+    @Column(name = "con_display_id")
+    override var displayId: String = ""
 
     @Column(name = "con_title")
     override var title: String = ""
@@ -42,12 +45,12 @@ class Contest: SampleContest(), SimpleItem {
     @Column(name = "con_edit_time")
     override var editTime: Date? = null
 
-    @Transient
+    @JsonIgnore
     @Schema(name = "show_guest", hidden = true)
     @Column(name = "con_show_guest")
     override var showGuest: Boolean = false
 
-    @Transient
+    @JsonIgnore
     @Schema(name = "show_public", hidden = true)
     @Column(name = "con_show_public")
     override var showPublic: Boolean = false
@@ -64,8 +67,7 @@ class Contest: SampleContest(), SimpleItem {
     }
 }
 
-open class SampleContest: Serializable {
-    open val id: Int = 0
-    open var title: String = ""
-    open var description: String? = null
+interface SampleContest: IdItem {
+    var title: String
+    var description: String?
 }

@@ -11,11 +11,17 @@ interface ContestProblemRepository: JpaRepository<ContestProblem, Int> {
         "select `p_id` from `contest_problem` where `con_id` = :id",
         nativeQuery = true
     )
-    fun getByContestId(id: Int): List<Int>?
+    fun getByContestId(id: String): List<String>?
 
     @Query(
         "select `con_id` from `contest_problem` where `p_id` = :id",
         nativeQuery = true
     )
-    fun getByProblemId(id: Int): List<Int>?
+    fun getByProblemId(id: String): List<String>?
+
+    @Query(
+        "delete from `contest_problem` where `con_id` = :id",
+        nativeQuery = true
+    )
+    fun deleteByContestId(id: String)
 }

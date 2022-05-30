@@ -14,8 +14,8 @@ class ContestProblem: Serializable {
     val id: Int = 0
 
     @Column(name = "con_id")
-    var cid: Int = 0
+    var cid: String = ""
 
     @Column(name = "p_id")
-    var pid: Int = 0
+    var pid: String = ""
 }

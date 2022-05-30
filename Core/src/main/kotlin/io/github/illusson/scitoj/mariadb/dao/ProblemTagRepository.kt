@@ -11,11 +11,11 @@ interface ProblemTagRepository: JpaRepository<ProblemTags, Long> {
         "select `t_id` from `problem_tags` where `p_id` = :pid",
         nativeQuery = true
     )
-    fun getTagsByProblem(pid: Int): List<Int>
+    fun getTagsByProblem(pid: String): List<Int>
 
     @Query(
         "select `p_id` from `problem_tags` where `t_id` in :tid",
         nativeQuery = true
     )
-    fun getProblemByTags(tid: List<Int>): List<Int>
+    fun getProblemByTags(tid: List<Int>): List<String>
 }

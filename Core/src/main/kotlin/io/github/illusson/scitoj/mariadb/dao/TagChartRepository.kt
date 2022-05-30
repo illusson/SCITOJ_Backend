@@ -1,6 +1,8 @@
 package io.github.illusson.scitoj.mariadb.dao
 
 import io.github.illusson.scitoj.mariadb.domain.TagChart
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 import org.springframework.stereotype.Repository
@@ -20,8 +22,8 @@ interface TagChartRepository: JpaRepository<TagChart, Int> {
     fun getTagIn(ids: List<Int>): List<TagChart>
 
     @Query(
-        "select * from `problem_tag_chart` order by :order limit :start, :size",
+        "select * from `problem_tag_chart` order by #{#pageable}",
         nativeQuery = true
     )
-    fun list(start: Int, size: Int, order: String): List<TagChart>
+    fun list(pageable: Pageable): Page<TagChart>
 }

@@ -30,6 +30,8 @@ class Application {
         fun main(args: Array<String>) {
             context = runApplication<Application>(*setup(args))
             Log.w("服务启动成功！")
+            val listen = "127.0.0.1:${System.getProperty("server.port")}"
+            Log.w("监听：$listen")
         }
 
         /** 是否为 Debug 环境 */

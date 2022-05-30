@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.RestController
 import javax.servlet.ServletException
 
-@Tag(name = "登录类", description = "用户登录")
+@Tag(name = "登录类")
 @RestController
 class LoginController {
     @Autowired

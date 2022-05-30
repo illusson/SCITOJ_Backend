@@ -1,10 +1,10 @@
 package io.github.illusson.scitoj.dto.request
 
-import io.swagger.v3.oas.annotations.media.Schema
-import org.springframework.web.bind.annotation.RequestParam
+import io.github.sgpublic.aidescit.api.dto.SignedRequest
 
-data class TagProblemDto(
-    @Schema(name = "t_id", required = true)
-    @RequestParam(name = "t_id")
-    val tid: List<Int>
-): ListPageDto()
+data class TagListDto(
+    override val page: Int,
+    override val size: Int,
+    override val ts: Long,
+    override val sign: String
+): PagedList, SignedRequest

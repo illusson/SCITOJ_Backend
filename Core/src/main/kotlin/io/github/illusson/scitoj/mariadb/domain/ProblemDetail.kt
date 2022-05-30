@@ -1,7 +1,9 @@
 package io.github.illusson.scitoj.mariadb.domain
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import io.github.sgpublic.aidescit.api.core.util.fromGson
 import io.github.sgpublic.aidescit.api.core.util.toGson
+import io.swagger.v3.oas.annotations.media.Schema
 import java.io.Serializable
 import javax.persistence.*
 
@@ -10,7 +12,9 @@ import javax.persistence.*
 class ProblemDetail: Serializable {
     @Id
     @Column(name = "p_id")
-    var id: Int = 0
+    @JsonIgnore
+    @Schema(hidden = true)
+    var id: String = ""
 
     @Column(name = "p_description")
     var description: String = ""

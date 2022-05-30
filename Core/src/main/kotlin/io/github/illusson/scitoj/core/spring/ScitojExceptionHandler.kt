@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice
 @RestControllerAdvice
 class ScitojExceptionHandler {
     /** 容错处理，请求题目不存在错误拦截 */
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(ProblemNotFoundException::class)
     fun handleProblemNotFoundException(): FailedResult {
         return FailedResult.PROBLEM_NOTFOUND

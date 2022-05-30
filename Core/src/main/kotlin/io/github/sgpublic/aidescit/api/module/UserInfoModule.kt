@@ -83,18 +83,24 @@ class UserInfoModule {
             }
             return@run this
         }
-        result.classId = lblXzb.run {
-            if (this == ""){
+        result.classId = lblXzb.let {
+            if (it == ""){
                 throw ServerRuntimeException("班级名称获取失败")
             }
-            val match = Pattern.compile("(\\d+)\\.?(\\d+)班").matcher(this)
+            val match = Pattern.compile("(\\d+)\\.?(\\d+)班").matcher(it)
             if (match.find()){
-                return@run match.group(0)
+                return@let match.group(0)
                     .replace("班", "").toIntOrNull()
                     ?: throw ServerRuntimeException("班级ID解析失败")
             } else {
                 throw ServerRuntimeException("班级ID获取失败")
             }
+        }
+        specialtyChart.findByName(lblXzb)?.let {
+            // 针对已存在登录信息的大四学生登录时无法获取课表的缓存处理。
+            result.faculty = it.faculty
+            result.specialty = it.specialty
+            return result
         }
         val lblXy = doc.select("#lbl_xy").text().run {
             if (this == ""){
@@ -152,5 +158,9 @@ class UserInfoModule {
             return result
         }
         throw ServerRuntimeException("专业ID获取失败：$lblZymc")
+    }
+
+    fun setUserRule(username: String, role: String): Boolean {
+        return info.setRoleByUser(username, role)
     }
 }

@@ -13,7 +13,7 @@ class ProblemTags {
     val id: Long = 0
 
     @Column(name = "p_id")
-    var pid: Int = 0
+    var pid: String = ""
 
     @Column(name = "t_id")
     var tid: Int = 0

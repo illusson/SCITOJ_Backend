@@ -19,25 +19,25 @@ class ContestModule {
     @Autowired
     private lateinit var conProblem: ContestProblemRepository
     @Autowired
-    private lateinit var problem: ProblemModule
+    private lateinit var problems: ProblemModule
 
-    fun create(title: String): Int {
+    fun create(displayId: String, title: String) {
         Contest().also {
             it.createTime = Date()
             it.createUser = CurrentUser.USERNAME
             it.title = title
         }.let {
-            return contest.save(it).id
+            contest.save(it)
         }
     }
 
     fun edit(
-        cid: Int, description: String, start: Date,
+        displayId: String, description: String, start: Date,
         duration: Duration, showGuest: Boolean? = null,
         showPublic: Boolean? = null, title: String? = null,
-        problem: List<Int>? = null
+        problem: List<String>? = null
     ) {
-        val con = contest.findByIdAuthed(cid)
+        val con = contest.findByIdAuthed(displayId)
         title?.let { con.title = title }
         con.description = description
         con.startTime = start
@@ -46,13 +46,14 @@ class ContestModule {
         con.showGuest = showGuest == true
         con.showPublic = con.showGuest || showPublic == true
 
-        val pList = conProblem.getByContestId(cid)
+        val pList = conProblem.getByContestId(displayId)
         if (problem != null) {
-            conProblem.deleteAllById(pList ?: listOf())
+            conProblem.deleteByContestId(displayId)
             conProblem.saveAll(problem.map { pid ->
+                val (prob, _, _) = problems.getProblemDetail(pid)
                 return@map ContestProblem().also {
-                    it.pid = pid
-                    it.cid = cid
+                    it.pid = prob.displayId
+                    it.cid = displayId
                 }
             })
         } else if (con.showPublic && pList.isNullOrEmpty()) {

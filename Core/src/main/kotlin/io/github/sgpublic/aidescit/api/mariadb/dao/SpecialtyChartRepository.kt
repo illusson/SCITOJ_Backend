@@ -18,6 +18,9 @@ interface SpecialtyChartRepository: JpaRepository<SpecialtyChart, SpecialtyChart
     @Query("select `s_name` from `specialty_chart` where `f_id` = :f and `s_id` = :s", nativeQuery = true)
     fun getSpecialtyName(@Param("f") faculty: Int, @Param("s") specialty: Int): String?
 
+    @Query("select * from `specialty_chart` where `s_name` = :name", nativeQuery = true)
+    fun findByName(name: String): SpecialtyChart?
+
     /**
      * 列出所有专业名称字典
      * @return 返回专业名称，若课表信息不存在则返回 null

@@ -1,6 +1,9 @@
 package io.github.sgpublic.aidescit.api.mariadb.domain
 
 import io.github.sgpublic.aidescit.api.core.spring.security.AidescitAuthority
+import io.github.sgpublic.aidescit.api.mariadb.dao.ClassChartRepository
+import io.github.sgpublic.aidescit.api.mariadb.dao.FacultyChartRepository
+import io.github.sgpublic.aidescit.api.mariadb.dao.SpecialtyChartRepository
 import io.github.sgpublic.aidescit.api.module.APIModule
 import org.springframework.security.core.GrantedAuthority
 import javax.persistence.*
@@ -115,4 +118,48 @@ open class ClassInfo {
     fun isNull(): Boolean {
         return faculty < 0 || specialty < 0 || grade < 0 || classId < 0
     }
+}
+
+data class Info(
+    val name: String,
+    val nickname: String?,
+    val identify: Description<Int>,
+    val role: Description<String>,
+    val faculty: String?,
+    val specialty: String?,
+    val `class`: String?,
+    val grade: String?,
+) {
+    data class Description<T>(
+        var id: T,
+        var desc: String
+    )
+}
+
+@Transient
+fun UserInfo.getInfo(
+    facultyChart: FacultyChartRepository,
+    specialtyChart: SpecialtyChartRepository,
+    classChart: ClassChartRepository
+): Info {
+    return Info(
+        name = name,
+        nickname = nickname,
+        identify = Info.Description(
+            id = identify,
+            desc = UserInfo.IDENTIFIES[identify],
+        ),
+        role = Info.Description(
+            id = role,
+            desc = AidescitAuthority.AUTHORITIES[role]!!
+        ),
+        faculty = facultyChart.getFacultyName(faculty),
+        specialty = specialtyChart.getSpecialtyName(
+            faculty, specialty
+        ),
+        `class` = classChart.getClassName(
+            faculty, specialty, classId, grade
+        ),
+        grade = grade.toString()
+    )
 }

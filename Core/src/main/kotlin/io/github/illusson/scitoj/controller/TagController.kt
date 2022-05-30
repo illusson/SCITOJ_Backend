@@ -1,7 +1,8 @@
 package io.github.illusson.scitoj.controller
 
-import io.github.illusson.scitoj.dto.request.ListPageDto
-import io.github.illusson.scitoj.dto.response.TagListDto
+import io.github.illusson.scitoj.dto.request.TagListDto
+import io.github.illusson.scitoj.dto.response.PagedDto
+import io.github.illusson.scitoj.mariadb.domain.TagChart
 import io.github.illusson.scitoj.module.ProblemTagModule
 import io.github.sgpublic.aidescit.api.core.spring.annotation.ApiGetMapping
 import io.swagger.v3.oas.annotations.Operation
@@ -18,8 +19,8 @@ class TagController {
 
     @Operation(summary = "标签列表", description = "列出所有标签及其 ID。")
     @ApiGetMapping("/api/tags")
-    fun getTags(@ParameterObject page: ListPageDto): TagListDto {
-        val list = tags.listTags(page)
-        return TagListDto(list)
+    fun getTags(@ParameterObject page: TagListDto): PagedDto<TagChart> {
+        val list = tags.listTags(page.pageable)
+        return PagedDto.of(list)
     }
 }

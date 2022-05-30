@@ -12,10 +12,4 @@ open class BaseResponseDto(
         this.code = code
         this.message = message
     }
-
-    companion object {
-        fun new(code: Int, message: String): BaseResponseDto {
-            return BaseResponseDto(code, message)
-        }
-    }
 }

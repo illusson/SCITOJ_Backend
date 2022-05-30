@@ -16,4 +16,7 @@ interface UserInfoRepository: JpaRepository<UserInfo, String> {
      */
     @Query("select * from `user_info` where `u_id` = :uid", nativeQuery = true)
     fun getByUsername(@Param("uid") username: String): UserInfo?
+
+    @Query("update `user_info` set `u_role` = :role where `u_id` = :uid", nativeQuery = true)
+    fun setRoleByUser(@Param("uid") username: String, @Param("role") role: String): Boolean
 }
